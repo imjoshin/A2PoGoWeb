@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACC,OAAM,CACL,KAAK,CAAE,KAAK,CACZ,KAAK,CAAE,KAAK,CAGb,MAAK,CACJ,KAAK,CAAE,KAAK",
+"sources": ["../../assets/sass/test.scss"],
+"names": [],
+"file": "app.css"
+}
