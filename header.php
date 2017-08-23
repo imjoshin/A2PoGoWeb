@@ -3,7 +3,6 @@
   <title>A2 Pokemon Go</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
   <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-  <link href="dist/css/navbar-fixed-side.css" rel="stylesheet" />
   <link href="dist/css/app.css" rel="stylesheet" media="screen" />
   <script src="dist/js/jquery-3.2.1.min.js"></script>
   <script src="dist/js/bootstrap.min.js"></script>

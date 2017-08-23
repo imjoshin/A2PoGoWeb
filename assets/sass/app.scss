@@ -1,0 +1,53 @@
+@import 'palette';
+
+$navWidth: 200px;
+
+#nav {
+	position: absolute;
+	z-index: 10;
+	height: 100%;
+
+	#main-nav, #sub-nav {
+		width: $navWidth;
+		height: 100%;
+		color: $white;
+
+		.nav-container {
+
+			&-options {
+				display: none;
+
+				&-item {
+
+				}
+			}
+		}
+	}
+
+	#main-nav {
+		float: left;
+		background-color: $dark-blue;
+
+		#welcome {
+			background-image: url('../img/a2pogo.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			height: 120px;
+			margin-bottom: 20px;
+		}
+
+	}
+
+	#sub-nav {
+		display: none;
+		margin-left: $navWidth;
+	}
+}
+
+#map-container {
+	height: 100%;
+
+	#map {
+		height: 100%;
+	}
+}
