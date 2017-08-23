@@ -1,46 +1,96 @@
 @import 'palette';
 
-$navWidth: 200px;
+$nav-width: 250px;
 
 #nav {
 	position: absolute;
 	z-index: 10;
 	height: 100%;
+	opacity: .98;
 
 	#main-nav, #sub-nav {
-		width: $navWidth;
+		width: $nav-width;
 		height: 100%;
 		color: $white;
+		font-size: 18px;
+		overflow-y: scroll;
 
 		.nav-container {
+			padding: 15px;
+
+			label {
+				cursor: pointer;
+				transition: padding-left .3s;
+
+				&:hover {
+					padding-left: 10px;
+				}
+			}
+
+			&--active {
+				label {
+					padding-left: 10px;
+				}
+			}
 
 			&-options {
 				display: none;
+				padding-left: 15px;
 
 				&-item {
+					cursor: pointer;
+					transition: padding-left .3s;
+					padding: 10px;
 
+					&:hover {
+						padding-left: 20px;
+					}
+
+					&--active {
+						padding-left: 20px;
+					}
 				}
+			}
+		}
+
+		&::-webkit-scrollbar
+		{
+			width: 5px;
+			background-color: rgba(255, 255, 255, .3);
+
+			&-track {
+				-webkit-box-shadow: none;
+				background-color: inherit;
+			}
+
+			&-thumb {
+				background-color: rgba(255, 255, 255, .3);
+				border-radius: 3px;
 			}
 		}
 	}
 
 	#main-nav {
 		float: left;
+		z-index: 12;
+		position: relative;
 		background-color: $dark-blue;
 
 		#welcome {
 			background-image: url('../img/a2pogo.png');
 			background-size: contain;
 			background-repeat: no-repeat;
-			height: 120px;
-			margin-bottom: 20px;
+			height: 150px;
+			margin-bottom: 30px;
 		}
 
 	}
 
 	#sub-nav {
-		display: none;
-		margin-left: $navWidth;
+		z-index: 11;
+		position: relative;
+		left: -$nav-width;
+		background-color: $blue;
 	}
 }
 
