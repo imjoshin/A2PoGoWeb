@@ -1,7 +1,7 @@
 $().ready(function() {
 
 	if ($('#login-modal').length) {
-		
+
 	}
 
 	$('.nav-container label').on('click', function() {
@@ -17,13 +17,13 @@ $().ready(function() {
 		}
 
 		// reset subnav
-		$('#sub-nav').animate({left: '-' + $('#sub-nav').width() + 'px'}, 300);
+		$('#sub-nav').animate({left: '-' + ($('#sub-nav').width() + 10) + 'px'}, 300);
 		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 	});
 
 	$('.nav-container-options-item').on('click', function() {
 		if ($(this).hasClass('nav-container-options-item--active')) {
-			$('#sub-nav').animate({left: '-' + $('#sub-nav').width() + 'px'}, 300);
+			$('#sub-nav').animate({left: '-' + ($('#sub-nav').width() + 10) + 'px'}, 300);
 			$(this).removeClass('nav-container-options-item--active');
 		} else {
 			$('#sub-nav').animate({left: '0px'}, 300);

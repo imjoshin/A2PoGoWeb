@@ -2,7 +2,7 @@
 <?php include "header.php" ?>
 
 <?php
-	if (!isset($_SESSION['id']))
+	if (isset($_SESSION['id']))
 	{
 		?>
 		<div id="nav">
@@ -41,20 +41,36 @@
 	else
 	{
 		?>
-		<div id="login-modal">
-			<div id="login-tabs">
-				<div class="login-tabs-item login-tabs-item--active">
-					Login
+		<div id="login-wrapper">
+			<div id="login-wrapper-logo"></div>
+			<div class="login-modal">
+				<div class="login-modal-tabs">
+					<div class="login-modal-tabs-item login-modal-tabs-item--active" data-form="login">
+						Login
+					</div>
+					<div class="login-modal-tabs-item" data-form="register">
+						Register
+					</div>
 				</div>
-				<div class="login-tabs-item">
-					Register
+				<div class="login-modal-form login-modal-form--active" data-form="login">
+					<span>Username</span>
+					<input type="text">
+					<span>Password</span>
+					<input type="text"><br/><br/>
+					<a class="btn btn-blue">Login</a>
 				</div>
-			</div>
-			<div id="login-modal-form-login">
-
-			</div>
-			<div id="login-modal-form-register">
-
+				<div class="login-modal-form" data-form="register">
+					<span>Username</span>
+					<input type="text">
+					<span>Password</span>
+					<input type="text">
+					<span>Confirm Password</span>
+					<input type="text">
+					<span>Invite Code</span>
+					<input type="text"><br/><br/>
+					<a class="btn btn-blue">Register</a>
+				</div>
+				<div class='message'></div>
 			</div>
 		</div>
 		<?php
