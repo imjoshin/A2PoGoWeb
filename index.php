@@ -38,6 +38,27 @@
 		</div>
 		<?php
 	}
+	else
+	{
+		?>
+		<div id="login-modal">
+			<div id="login-tabs">
+				<div class="login-tabs-item login-tabs-item--active">
+					Login
+				</div>
+				<div class="login-tabs-item">
+					Register
+				</div>
+			</div>
+			<div id="login-modal-form-login">
+
+			</div>
+			<div id="login-modal-form-register">
+
+			</div>
+		</div>
+		<?php
+	}
 ?>
 
 <div id="map-container">

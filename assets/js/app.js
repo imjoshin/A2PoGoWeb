@@ -1,5 +1,9 @@
 $().ready(function() {
 
+	if ($('#login-modal').length) {
+		
+	}
+
 	$('.nav-container label').on('click', function() {
 		var container = $(this).parent();
 		if (container.hasClass('nav-container--active')) {
