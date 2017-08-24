@@ -1,6 +1,6 @@
 <?php
 
-public class Map
+class Map
 {
 
 }

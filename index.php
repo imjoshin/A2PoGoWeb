@@ -36,6 +36,9 @@
 
 			</div>
 		</div>
+		<span id="floating-logout" class="logout">
+			Logout
+		</span>
 		<?php
 	}
 	else
@@ -55,9 +58,9 @@
 				<div class="login-modal-form login-modal-form--active" data-form="login">
 					<form id="login-form">
 						<span>Username</span>
-						<input type="text">
+						<input type="text" name="username">
 						<span>Password</span>
-						<input type="text">
+						<input type="password" name="password">
 						<br/><br/>
 						<a class="btn btn-blue">Login</a>
 					</form>
@@ -65,15 +68,15 @@
 				<div class="login-modal-form" data-form="register">
 					<form id="register-form">
 						<span>Username</span>
-						<input type="text">
+						<input type="text" name="username">
 						<span>Password</span>
-						<input type="text">
+						<input type="password" name="password">
 						<span>Confirm Password</span>
-						<input type="text">
+						<input type="password" name="confirm_password">
 						<?php
 						if (REQUIRE_INVITE)
 						{
-							echo "<span>Invite Code</span><input type='text'>";
+							echo "<span>Invite Code</span><input type='text' name='invitation_code'>";
 						}
 						?>
 						<br/><br/>

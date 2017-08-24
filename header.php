@@ -1,5 +1,5 @@
 <?php require 'php/constants.php'; ?>
-
+<?php session_start(); ?>
 <html>
 <head>
   <title>A2 Pokemon Go</title>
@@ -13,4 +13,3 @@
 
 <body>
 <div id="wrapper">
-<?php include "nav.php"; ?>
