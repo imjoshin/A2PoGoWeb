@@ -1,3 +1,5 @@
+<?php require 'php/constants.php'; ?>
+
 <html>
 <head>
   <title>A2 Pokemon Go</title>
@@ -11,4 +13,4 @@
 
 <body>
 <div id="wrapper">
-<?php include "nav.php" ?>
+<?php include "nav.php"; ?>

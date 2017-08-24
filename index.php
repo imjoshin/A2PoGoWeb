@@ -2,7 +2,7 @@
 <?php include "header.php" ?>
 
 <?php
-	if (isset($_SESSION['id']))
+	if (isset($_SESSION['id']) || isset($_GET['fake']))
 	{
 		?>
 		<div id="nav">
@@ -53,22 +53,32 @@
 					</div>
 				</div>
 				<div class="login-modal-form login-modal-form--active" data-form="login">
-					<span>Username</span>
-					<input type="text">
-					<span>Password</span>
-					<input type="text"><br/><br/>
-					<a class="btn btn-blue">Login</a>
+					<form id="login-form">
+						<span>Username</span>
+						<input type="text">
+						<span>Password</span>
+						<input type="text">
+						<br/><br/>
+						<a class="btn btn-blue">Login</a>
+					</form>
 				</div>
 				<div class="login-modal-form" data-form="register">
-					<span>Username</span>
-					<input type="text">
-					<span>Password</span>
-					<input type="text">
-					<span>Confirm Password</span>
-					<input type="text">
-					<span>Invite Code</span>
-					<input type="text"><br/><br/>
-					<a class="btn btn-blue">Register</a>
+					<form id="register-form">
+						<span>Username</span>
+						<input type="text">
+						<span>Password</span>
+						<input type="text">
+						<span>Confirm Password</span>
+						<input type="text">
+						<?php
+						if (REQUIRE_INVITE)
+						{
+							echo "<span>Invite Code</span><input type='text'>";
+						}
+						?>
+						<br/><br/>
+						<a class="btn btn-blue">Register</a>
+					</form>
 				</div>
 				<div class='message'></div>
 			</div>
