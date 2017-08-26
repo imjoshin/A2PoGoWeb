@@ -7,6 +7,7 @@ $().ready(function() {
 
 			$('.login-modal-form--active').removeClass('login-modal-form--active');
 			$('.login-modal-form[data-form=' + $(this).data('form') + ']').addClass('login-modal-form--active');
+			$('.login-modal .message').html('');
 		}
 	});
 

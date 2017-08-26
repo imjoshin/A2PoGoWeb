@@ -2,34 +2,60 @@
 <?php include "header.php" ?>
 
 <?php
-	if (isset($_SESSION['id']) || isset($_GET['fake']))
+	if (isset($_SESSION['id']))
 	{
 		?>
 		<div id="nav">
-			<div id="main-nav">
+			<div class="main-nav">
 				<div id="welcome"></div>
-				<div class="nav-container">
+				<div class="nav-container <?php echo count($accounts) ? "" : "nav-container--empty"; ?>">
 					<label>Accounts</label>
 					<i class="btn-add fa fa-plus-square-o <?php echo count($accounts) ? "" : "bouncy"; ?>"></i>
 					<div class="nav-container-options">
+						<!--<div class='nav-container-options-item'></div>-->
 					</div>
 				</div>
-				<div class="nav-container <?php echo count($accounts) ? "" : "disabled"; ?>">
+				<div class="nav-container <?php echo (count($accounts) ? " " : "disabled ") . (count($maps) ? "" : "nav-container--empty"); ?>">
 					<label>Maps</label>
 					<i class='btn-add fa fa-plus-square-o  <?php echo count($maps) ? "" : "bouncy"; ?>' <?php echo count($accounts) ? "" : "style='display: none;'"; ?>></i>
 					<div class="nav-container-options">
-						<?php
-							for($i = 1; $i <= 20; $i++)
-							{
-								echo "<div class='nav-container-options-item'>$i</div>";
-							}
-						?>
 					</div>
 				</div>
 
 			</div>
-			<div id="sub-nav">
+			<div class="sub-nav">
+				<span class="sub-nav-header">Add Account</span>
+				<div class="sub-nav-form sub-nav-form-account">
+					<span>Name</span>
+					<input type="text" id="name" name="name">
+					<span>Type</span>
+					<select id="type" name="type">
+						<option>Phone/Email</option>
+						<option>Slack</option>
+						<option>Discord</option>
+					</select>
+					<span class="sub-nav-form-address">
+						<span>Address</span>
+						<input type="text" id="address" name="address">
+						<span class="sub-nav-form-address-verification">
+							<span>Verification Code</span>
+							<a class="btn">Send Code</a>
+							<input type="text" id="verification" name="verification" style="display: none;">
+						</span>
+					</span>
+					<span class="sub-nav-form-webhook" style="display: none;">
+						<span>Webhook URL</span>
+						<input type="text" id="webhook" name="webhook">
+						<span>Channel ID</span>
+						<input type="text" id="channel" name="channel">
+					</span>
+					<br/>
+					<a class="btn">Save</a>
+				</div>
+				<div class="sub-nav-form sub-nav-form-map">
 
+				</div>
+				<div class='message'></div>
 			</div>
 		</div>
 		<span id="floating-logout" class="logout">

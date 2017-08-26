@@ -5,7 +5,7 @@ $().ready(function() {
 	$.fn.extend({
 		openNavElement: function() {
 			if ($(this).is('.btn-add')) {
-
+				openAdd($(this));
 			} else if ($(this).is('.nav-container label')) {
 				openContainer($(this).parent());
 			} else if ($(this).is('.nav-container-options-item')) {
@@ -13,6 +13,22 @@ $().ready(function() {
 			}
 		}
 	});
+
+	function openAdd(button) {
+		if (!button.parent().hasClass('nav-container--active')) {
+			$('.nav-container--active .nav-container-options').slideUp(300);
+			$('.nav-container--active').removeClass('nav-container--active');
+			button.parent().find('.nav-container-options').slideDown(300);
+			button.parent().addClass('nav-container--active');
+		}
+
+		if (button.hasClass('bouncy')) {
+			button.removeClass('bouncy');
+		}
+		
+		$('.sub-nav-header').html("Add Account");
+		$('.sub-nav').animate({left: '0px'}, 300);
+	}
 
 	// Main header
 	function openContainer(container) {
@@ -27,20 +43,19 @@ $().ready(function() {
 		}
 
 		// reset subnav
-		$('#sub-nav').animate({left: '-' + ($('#sub-nav').width() + 10) + 'px'}, 300);
+		$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
 		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 	}
 
 	// Map/Account item
 	function openItem(item) {
 		if (item.hasClass('nav-container-options-item--active')) {
-			$('#sub-nav').animate({left: '-' + ($('#sub-nav').width() + 10) + 'px'}, 300);
+			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
 			item.removeClass('nav-container-options-item--active');
 		} else {
-			$('#sub-nav').animate({left: '0px'}, 300);
+			$('.sub-nav').animate({left: '0px'}, 300);
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 			item.addClass('nav-container-options-item--active');
 		}
 	}
-
 });

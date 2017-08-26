@@ -27,6 +27,9 @@ switch(strtolower($_POST['call']))
 	case 'register':
 		$ret = User::register($_POST['username'], $_POST['password'], $_POST['confirm_password'], isset($_POST['invitation_code']) ? $_POST['invitation_code'] : null);
 		break;
+	case 'verify':
+		$ret = Account::sendVerificationCode($_POST['address']);
+		break;
 }
 
 echo json_encode($ret);

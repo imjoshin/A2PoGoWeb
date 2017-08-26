@@ -64,7 +64,7 @@ class User
 		}
 
 		db_query("INSERT INTO user(username, password) VALUES ( ?, ? )", array($username, $password));
-		db_query("UPDATE invitation SET consumed = 1 WHERE code = ?", array($invitation_code));
+		db_query("DELETE FROM invitation WHERE code = ?", array($invitation_code));
 
 		$user = db_query("SELECT id, username FROM user WHERE username = ?", array($username));
 
