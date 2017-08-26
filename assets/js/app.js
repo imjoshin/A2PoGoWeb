@@ -32,6 +32,39 @@ $().ready(function() {
 					button.hide();
 					$('#verification').show();
 				} else {
+					if (data.output == "Verification code has already sent.") {
+						button.hide();
+						$('#verification').show();
+					}
+
+					$('.sub-nav .message').addClass('message-error');
+					$('.sub-nav .message').html(data.output);
+				}
+			}
+		});
+	});
+
+	$('.sub-nav-form-account .btn').on('click', function() {
+		form = $('.sub-nav-form-account');
+
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "php/ajax.php",
+			data: {
+				call: 'add_account',
+				form: form.serialize()
+			},
+			success: function(data) {
+				if (data.success) {
+					$('.sub-nav .message').empty();
+					var account = $("<div class='nav-container-options-item'></div>");
+					account.html(data.output['name']);
+					account.hide();
+					$('.nav-container-accounts').append(account);
+					account.slideDown(500);
+					$.closeSubNav();
+				} else {
 					$('.sub-nav .message').addClass('message-error');
 					$('.sub-nav .message').html(data.output);
 				}

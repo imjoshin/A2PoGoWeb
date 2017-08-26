@@ -1,4 +1,5 @@
 <?php require 'php/constants.php'; ?>
+<?php require 'php/utils.php'; ?>
 <?php session_start(); ?>
 <html>
 <head>

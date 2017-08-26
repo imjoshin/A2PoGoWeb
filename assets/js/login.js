@@ -75,6 +75,7 @@ $().ready(function() {
 					location.reload();
 				} else {
 					// TODO do something about it
+					alert("Something went wrong!");
 					location.reload();
 				}
 			}

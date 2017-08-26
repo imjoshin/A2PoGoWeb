@@ -48,6 +48,47 @@ class Account
 			return array("success"=>true);
 		}
 	}
+
+	public static function addAccount($form)
+	{
+		$name = trim($form['name']);
+		$address = trim($form['address']);
+
+		if (!preg_match('/[a-zA-Z0-9 ._-]{1,32}$/', $name))
+		{
+			return array('success'=>false, 'output'=>'Invalid name.');
+		}
+
+		if ($form['type'] === 'Phone/Email')
+		{
+			$usercheck = db_query("SELECT address FROM verification WHERE address = ? AND code = ?", array($address, $form['verification']));
+			if (!count($usercheck))
+			{
+				return array('success'=>false, 'output'=>"Invalid verification code.");
+			}
+
+			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+			if (count($namecheck))
+			{
+				return array('success'=>false, 'output'=>"This name is already in use.");
+			}
+
+			$namecheck = db_query("SELECT name FROM account WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
+			if (count($namecheck))
+			{
+				return array('success'=>false, 'output'=>"This address is already in use.");
+			}
+
+			db_query("INSERT INTO account(user_id, name, address) VALUES (?, ?, ?)", array($_SESSION['id'], $name, $address));
+			db_query("DELETE FROM verification WHERE address = ?", array($address));
+
+			return array("success"=>true, "output"=>array("name"=>$name, "address"=>$address));
+		}
+		elseif ($form['type'] === "Slack" || $form['type'] === "Discord")
+		{
+			error_log('slack/discord');
+		}
+	}
 }
 
 ?>

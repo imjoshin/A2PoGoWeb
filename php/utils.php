@@ -1,6 +1,15 @@
 <?php
 require 'auth.php';
 
+
+function init()
+{
+	$accounts = db_query("SELECT id, name, address FROM account WHERE user_id = ?", array($_SESSION['id']));
+	$maps = db_query("SELECT id, name FROM map WHERE user_id = ?", array($_SESSION['id']));
+
+	return array("accounts"=>$accounts, "maps"=>$maps);
+}
+
 /*
  * Returns a database connection
  */

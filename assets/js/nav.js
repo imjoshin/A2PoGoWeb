@@ -11,7 +11,7 @@ $().ready(function() {
 			} else if ($(this).is('.nav-container-options-item')) {
 				openItem($(this));
 			}
-		}
+		},
 	});
 
 	function openAdd(button) {
@@ -25,7 +25,7 @@ $().ready(function() {
 		if (button.hasClass('bouncy')) {
 			button.removeClass('bouncy');
 		}
-		
+
 		$('.sub-nav-header').html("Add Account");
 		$('.sub-nav').animate({left: '0px'}, 300);
 	}
@@ -57,5 +57,10 @@ $().ready(function() {
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 			item.addClass('nav-container-options-item--active');
 		}
+	}
+
+	function closeSubNav() {
+		$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
+		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 	}
 });

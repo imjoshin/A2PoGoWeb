@@ -10,6 +10,12 @@ if (!isset($_POST['call']))
 	return;
 }
 
+session_start();
+if (!isset($_SESSION['id']))
+{
+	return json_encode(array("success"=>false, "output"=>"Session expired. Please refresh."));
+}
+
 // look for serialized form
 if (isset($_POST['form']))
 {
@@ -30,6 +36,9 @@ switch(strtolower($_POST['call']))
 	case 'verify':
 		$ret = Account::sendVerificationCode($_POST['address']);
 		break;
+	case 'add_account':
+		$ret = Account::addAccount($_POST);
+		break;
 }
 
 echo json_encode($ret);
@@ -40,7 +49,7 @@ function unserialize_form($array)
 	foreach(explode('&', $array) as $value)
 	{
 		$value1 = explode('=', $value);
-		$data[$value1[0]] = $value1[1];
+		$data[urldecode($value1[0])] = urldecode($value1[1]);
 	}
 	return $data;
 }

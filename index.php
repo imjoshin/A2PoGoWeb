@@ -4,18 +4,24 @@
 <?php
 	if (isset($_SESSION['id']))
 	{
+		extract(init());
 		?>
 		<div id="nav">
 			<div class="main-nav">
 				<div id="welcome"></div>
-				<div class="nav-container <?php echo count($accounts) ? "" : "nav-container--empty"; ?>">
+				<div class="nav-container nav-container-accounts <?php echo count($accounts) ? "" : "nav-container--empty"; ?>">
 					<label>Accounts</label>
 					<i class="btn-add fa fa-plus-square-o <?php echo count($accounts) ? "" : "bouncy"; ?>"></i>
 					<div class="nav-container-options">
-						<!--<div class='nav-container-options-item'></div>-->
+						<?php
+							foreach ($accounts as $account)
+							{
+								echo "<div class='nav-container-options-item' data-id='{$account['id']}'>{$account['name']}</div>";
+							}
+						?>
 					</div>
 				</div>
-				<div class="nav-container <?php echo (count($accounts) ? " " : "disabled ") . (count($maps) ? "" : "nav-container--empty"); ?>">
+				<div class="nav-container nav-container-maps <?php echo (count($accounts) ? " " : "disabled ") . (count($maps) ? "" : "nav-container--empty"); ?>">
 					<label>Maps</label>
 					<i class='btn-add fa fa-plus-square-o  <?php echo count($maps) ? "" : "bouncy"; ?>' <?php echo count($accounts) ? "" : "style='display: none;'"; ?>></i>
 					<div class="nav-container-options">
@@ -25,7 +31,7 @@
 			</div>
 			<div class="sub-nav">
 				<span class="sub-nav-header">Add Account</span>
-				<div class="sub-nav-form sub-nav-form-account">
+				<form class="sub-nav-form sub-nav-form-account">
 					<span>Name</span>
 					<input type="text" id="name" name="name">
 					<span>Type</span>
@@ -51,10 +57,10 @@
 					</span>
 					<br/>
 					<a class="btn">Save</a>
-				</div>
-				<div class="sub-nav-form sub-nav-form-map">
+				</form>
+				<form class="sub-nav-form sub-nav-form-map">
 
-				</div>
+				</form>
 				<div class='message'></div>
 			</div>
 		</div>
