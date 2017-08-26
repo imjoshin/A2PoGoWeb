@@ -10,17 +10,13 @@
 				<div id="welcome"></div>
 				<div class="nav-container">
 					<label>Accounts</label>
+					<i class="btn-add fa fa-plus-square-o <?php echo count($accounts) ? "" : "bouncy"; ?>"></i>
 					<div class="nav-container-options">
-						<?php
-							for($i = 1; $i <= 10; $i++)
-							{
-								echo "<div class='nav-container-options-item'>$i</div>";
-							}
-						?>
 					</div>
 				</div>
-				<div class="nav-container">
+				<div class="nav-container <?php echo count($accounts) ? "" : "disabled"; ?>">
 					<label>Maps</label>
+					<i class='btn-add fa fa-plus-square-o  <?php echo count($maps) ? "" : "bouncy"; ?>' <?php echo count($accounts) ? "" : "style='display: none;'"; ?>></i>
 					<div class="nav-container-options">
 						<?php
 							for($i = 1; $i <= 20; $i++)
