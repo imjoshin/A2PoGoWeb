@@ -1,7 +1,6 @@
 <?php
 require 'auth.php';
 
-
 function init()
 {
 	$accounts = db_query("SELECT id, name, address, type FROM account WHERE user_id = ?", array($_SESSION['id']));
