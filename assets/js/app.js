@@ -1,4 +1,10 @@
 $().ready(function() {
+	// mobile device
+	if (typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1) {
+		$("#map").parent().siblings().remove();
+		$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
+	}
+
 	// handle nav events
 	$('.nav-container .btn-add, .nav-container:not(.disabled) label, .nav-container-options-item').on('click', function() {
 		$(this).openNavElement();
@@ -20,7 +26,7 @@ $().ready(function() {
 			$('.sub-nav-form-address').hide();
 			$('.sub-nav-form-webhook').show();
 		}
-		
+
 		$('.sub-nav .message').empty();
 	});
 
