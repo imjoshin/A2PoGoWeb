@@ -1,7 +1,7 @@
 <?php
 require '../utils.php';
 
-$seed = str_split('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+$seed = str_split('ABCDEFGHIJKLMNPQRSTUVWXYZ123456789');
 
 for ($i = 0; $i < intval($argv[1]); $i++)
 {
@@ -10,7 +10,7 @@ for ($i = 0; $i < intval($argv[1]); $i++)
 	{
 		$code .= $seed[$k];
 	}
-	
+
 	echo $code . "\n";
 	db_query("INSERT INTO invitation(code) VALUES (?)", array($code));
 }

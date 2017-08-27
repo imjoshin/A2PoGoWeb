@@ -4,10 +4,42 @@ require 'auth.php';
 
 function init()
 {
-	$accounts = db_query("SELECT id, name, address FROM account WHERE user_id = ?", array($_SESSION['id']));
+	$accounts = db_query("SELECT id, name, address, type FROM account WHERE user_id = ?", array($_SESSION['id']));
 	$maps = db_query("SELECT id, name FROM map WHERE user_id = ?", array($_SESSION['id']));
 
+	foreach ($accounts as &$account)
+	{
+		$icon = "fa-question-circle-o";
+		switch ($account['type'])
+		{
+			case 'phone':
+				$icon = 'fa-mobile';
+				break;
+			case 'email':
+				$icon = 'fa-envelope-o';
+				break;
+			case 'slack':
+				$icon = 'fa-slack';
+				break;
+			case 'discord':
+				$icon = 'fa-user-circle';
+				break;
+		}
+		$account['icon'] = $icon;
+	}
+
 	return array("accounts"=>$accounts, "maps"=>$maps);
+}
+
+function unserialize_form($array)
+{
+	$data = array();
+	foreach(explode('&', $array) as $value)
+	{
+		$value1 = explode('=', $value);
+		$data[urldecode($value1[0])] = urldecode($value1[1]);
+	}
+	return $data;
 }
 
 /*

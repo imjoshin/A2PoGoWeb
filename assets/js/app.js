@@ -5,18 +5,29 @@ $().ready(function() {
 	});
 
 	$('.sub-nav-form-account #type').on('change', function() {
-		if ($(this).val() == "Phone/Email") {
+		if ($(this).val() == "Phone" || $(this).val() == "Email") {
 			$('.sub-nav-form-address').show();
 			$('.sub-nav-form-webhook').hide();
+
+			if($(this).val() == "Phone") {
+				$('.sub-nav-form-address-phone').show();
+				$('.sub-nav-form-address-email').hide();
+			} else {
+				$('.sub-nav-form-address-phone').hide();
+				$('.sub-nav-form-address-email').show();
+			}
 		} else {
 			$('.sub-nav-form-address').hide();
 			$('.sub-nav-form-webhook').show();
 		}
+		
+		$('.sub-nav .message').empty();
 	});
 
 	// address verification
 	$('.sub-nav-form-address-verification .btn').on('click', function() {
 		button = $(this);
+		form = $('.sub-nav-form-account');
 
 		$.ajax({
 			type: "POST",
@@ -24,7 +35,7 @@ $().ready(function() {
 			url: "php/ajax.php",
 			data: {
 				call: 'verify',
-				address: $('#address').val()
+				form: form.serialize()
 			},
 			success: function(data) {
 				if (data.success) {
@@ -44,7 +55,7 @@ $().ready(function() {
 		});
 	});
 
-	$('.sub-nav-form-account .btn').on('click', function() {
+	$('.sub-nav-form-account .btn-save').on('click', function() {
 		form = $('.sub-nav-form-account');
 
 		$.ajax({
@@ -58,12 +69,24 @@ $().ready(function() {
 			success: function(data) {
 				if (data.success) {
 					$('.sub-nav .message').empty();
+
+					// previously no accounts
+					if (!$('.nav-container-accounts .nav-container-options-item').length) {
+						$('.nav-container-accounts').removeClass('nav-container--empty');
+						$('.nav-container-maps').removeClass('disabled');
+						$('.nav-container-maps .btn-add').fadeIn(500);
+					}
+
 					var account = $("<div class='nav-container-options-item'></div>");
-					account.html(data.output['name']);
+					account.html("<i class='fa " + data.output['icon'] + "' aria-hidden='true'></i>" + data.output['name']);
 					account.hide();
-					$('.nav-container-accounts').append(account);
+					$('.nav-container-accounts .nav-container-options').append(account);
 					account.slideDown(500);
-					$.closeSubNav();
+
+					$(document).closeSubNav(function() {
+						$('.sub-nav-form-address-verification .btn').show();
+						$('#verification').hide();
+					});
 				} else {
 					$('.sub-nav .message').addClass('message-error');
 					$('.sub-nav .message').html(data.output);

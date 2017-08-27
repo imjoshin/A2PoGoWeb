@@ -11,7 +11,7 @@ if (!isset($_POST['call']))
 }
 
 session_start();
-if (!isset($_SESSION['id']))
+if (!isset($_SESSION['id']) && !in_array(strtolower($_POST['call']), array("login", "register")))
 {
 	return json_encode(array("success"=>false, "output"=>"Session expired. Please refresh."));
 }
@@ -34,7 +34,7 @@ switch(strtolower($_POST['call']))
 		$ret = User::register($_POST['username'], $_POST['password'], $_POST['confirm_password'], isset($_POST['invitation_code']) ? $_POST['invitation_code'] : null);
 		break;
 	case 'verify':
-		$ret = Account::sendVerificationCode($_POST['address']);
+		$ret = Account::sendVerificationCode($_POST);
 		break;
 	case 'add_account':
 		$ret = Account::addAccount($_POST);
@@ -42,16 +42,5 @@ switch(strtolower($_POST['call']))
 }
 
 echo json_encode($ret);
-
-function unserialize_form($array)
-{
-	$data = array();
-	foreach(explode('&', $array) as $value)
-	{
-		$value1 = explode('=', $value);
-		$data[urldecode($value1[0])] = urldecode($value1[1]);
-	}
-	return $data;
-}
 
 ?>

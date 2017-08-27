@@ -81,4 +81,10 @@ $().ready(function() {
 			}
 		});
 	});
+
+	$('.login-modal-form input').on('keypress', function (e) {
+		if (e.which == 13) {
+			$(this).siblings('.btn').click();
+		}
+	});
 });

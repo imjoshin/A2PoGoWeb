@@ -12,6 +12,14 @@ $().ready(function() {
 				openItem($(this));
 			}
 		},
+		closeSubNav: function(callback) {
+			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
+			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
+
+			$('.sub-nav-form').trigger("reset");
+			$('.sub-nav-form select').trigger("change");
+			callback();
+		}
 	});
 
 	function openAdd(button) {
@@ -57,10 +65,5 @@ $().ready(function() {
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 			item.addClass('nav-container-options-item--active');
 		}
-	}
-
-	function closeSubNav() {
-		$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
-		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 	}
 });
