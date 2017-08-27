@@ -34,7 +34,10 @@ $().ready(function() {
 			button.removeClass('bouncy');
 		}
 
-		$('.sub-nav-header').html("Add Account");
+
+		$('.sub-nav-header').html(button.data('name'));
+		$('.sub-nav-form').hide();
+		$('.sub-nav-form-' + button.data('target')).show();
 		$('.sub-nav').animate({left: '0px'}, 300);
 	}
 
