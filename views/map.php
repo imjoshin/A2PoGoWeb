@@ -1,6 +1,6 @@
-<span>Name</span>
+<h3>Name</h3>
 <input type="text" id="name" name="name">
-<span>Days Active</span>
+<h3>Days Active</h3>
 <table>
 	<tr>
 		<td><input type="checkbox" name="days['s']" value="Sunday" /></td>
@@ -35,11 +35,37 @@
 		<td>Sunday</td>
 	</tr>
 </table>
-<span>Time Active</span>
+<h3>Time Active</h3>
 <input type="time" id="start-time" name="start-time" value="09:00:00.00"> -
 <input type="time" id="end-time" name="end-time" value="17:00:00.00">
-<span>Raids</span>
-<span>Pokemon</span>
-<span>Gyms</span>
+<h3>Accounts</h3>
+<table id='map-accounts'>
+</table>
+<h3>Notifications</h3>
+<h4>Pokemon</h4>
+<a class="btn btn-pokemon-select">Select Pokemon</a>
+<h4>Raids</h4>
+<table>
+	<tr>
+		<td><input type="checkbox" name="raids['1']" value="Sunday" /></td>
+		<td>Level 1</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="raids['2']" value="Monday" /></td>
+		<td>Level 2</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="raids['3']" value="Tuesday" /></td>
+		<td>Level 3</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="raids['4']" value="Wednesday" /></td>
+		<td>Level 4</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="raids['5']" value="Thursday" /></td>
+		<td>Level 5</td>
+	</tr>
+</table>
 <br/><br/>
 <a class="btn btn-save">Save</a>

@@ -1,6 +1,6 @@
-<span>Name</span>
+<h3>Name</h3>
 <input type="text" id="name" name="name">
-<span>Type</span>
+<h3>Type</h3>
 <select id="type" name="type">
 	<option>Phone</option>
 	<option>Email</option>
@@ -9,13 +9,13 @@
 </select>
 <span class="sub-nav-form-address">
 	<span class="sub-nav-form-address-email" style="display: none;">
-		<span>Address</span>
+		<h3>Address</h3>
 		<input type="text" id="address" name="address">
 	</span>
 	<span class="sub-nav-form-address-phone">
-		<span>Phone Number</span>
+		<h3>Phone Number</h3>
 		<input type="text" id="number" name="number">
-		<span>Carrier</span>
+		<h3>Carrier</h3>
 		<select id="carrier" name="carrier">
 			<option value="txt.att.net">AT&amp;T</option>
 			<option value="tmomail.net">T-Mobile</option>
@@ -38,15 +38,15 @@
 		</select>
 	</span>
 	<span class="sub-nav-form-address-verification">
-		<span>Verification Code</span>
+		<h3>Verification Code</h3>
 		<a class="btn">Send Code</a>
 		<input type="text" id="verification" name="verification" style="display: none;">
 	</span>
 </span>
 <span class="sub-nav-form-webhook" style="display: none;">
-	<span>Webhook URL</span>
+	<h3>Webhook URL</h3>
 	<input type="text" id="webhook" name="webhook">
-	<span>Channel ID</span>
+	<h3>Channel ID</h3>
 	<input type="text" id="channel" name="channel">
 </span>
 <br/>

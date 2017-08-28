@@ -5,6 +5,12 @@ $().ready(function() {
 		$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
 	}
 
+	$('.modal-wrapper:not(#login-wrapper)').on('click', function(e) {
+		if (e.target === this) {
+			$(this).hide();
+		}
+	});
+
 	// handle nav events
 	$('.nav-container .btn-add, .nav-container:not(.disabled) label, .nav-container-options-item').on('click', function() {
 		$(this).openNavElement();

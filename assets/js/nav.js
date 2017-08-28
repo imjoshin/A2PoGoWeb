@@ -34,6 +34,19 @@ $().ready(function() {
 			button.removeClass('bouncy');
 		}
 
+		if (button.parents('.nav-container-maps').length) {
+			$('#map-accounts').empty();
+			// get accounts
+			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
+				var row = $(" \
+					<tr> \
+						<td><input type='checkbox' name=\"account[" + $(this).data('id') + "]\" /></td> \
+						<td>" + $(this).html() + "</td> \
+					</tr> \
+				");
+				$('#map-accounts').append(row);
+			});
+		}
 
 		$('.sub-nav-header').html(button.data('name'));
 		$('.sub-nav-form').hide();
@@ -67,6 +80,22 @@ $().ready(function() {
 			$('.sub-nav').animate({left: '0px'}, 300);
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 			item.addClass('nav-container-options-item--active');
+		}
+
+		if (item.parents('.nav-container-accounts').length) {
+
+		} else if (item.parents('.nav-container-maps').length) {
+			$('#map-accounts').empty();
+			// get accounts
+			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
+				var row = $(" \
+					<tr> \
+						<td><input type='checkbox' name=\"account[" + $(this).data('id') + "]\" /></td> \
+						<td>" + $(this).html() + "</td> \
+					</tr> \
+				");
+				$('#map-accounts').append(row);
+			});
 		}
 	}
 });

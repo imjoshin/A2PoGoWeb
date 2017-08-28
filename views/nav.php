@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="sub-nav">
-		<span class="sub-nav-header">Add Account</span>
+		<h2 class="sub-nav-header">Add Account</h2>
 		<form class="sub-nav-form sub-nav-form-account">
 			<?php include 'views/account.php'; ?>
 		</form>

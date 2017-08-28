@@ -6,6 +6,7 @@
 	{
 		extract(init());
 		include 'views/nav.php';
+		include 'views/monselect.php';
 		?>
 		<span id="floating-logout" class="logout">
 			Logout
