@@ -40,7 +40,7 @@ $().ready(function() {
 			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
 				var row = $(" \
 					<tr> \
-						<td><input type='checkbox' name=\"account[" + $(this).data('id') + "]\" /></td> \
+						<td><input type='checkbox' name=\"accounts[" + $(this).data('id') + "]\" /></td> \
 						<td>" + $(this).html() + "</td> \
 					</tr> \
 				");

@@ -20,6 +20,7 @@ if (!isset($_SESSION['id']) && !in_array(strtolower($_POST['call']), array("logi
 if (isset($_POST['form']))
 {
 	$_POST = array_merge($_POST, unserialize_form($_POST['form']));
+	unset($_POST['form']);
 }
 
 switch(strtolower($_POST['call']))
@@ -38,6 +39,9 @@ switch(strtolower($_POST['call']))
 		break;
 	case 'add_account':
 		$ret = Account::addAccount($_POST);
+		break;
+	case 'save_map':
+		$ret = Map::saveMap($_POST);
 		break;
 }
 

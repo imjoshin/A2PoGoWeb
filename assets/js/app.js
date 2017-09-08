@@ -106,4 +106,40 @@ $().ready(function() {
 			}
 		});
 	});
+
+	$('.sub-nav-form-map .btn-save').on('click', function() {
+		form = $('.sub-nav-form-map');
+
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "php/ajax.php",
+			data: {
+				call: 'save_map',
+				form: form.serialize()
+			},
+			success: function(data) {
+				if (data.success) {
+					$('.sub-nav .message').empty();
+					/*
+					// previously no maps
+					if (!$('.nav-container-maps .nav-container-options-item').length) {
+						$('.nav-container-maps').removeClass('nav-container--empty');
+					}
+
+					var map = $("<div class='nav-container-options-item'></div>");
+					account.html("<i class='fa " + data.output['icon'] + "' aria-hidden='true'></i>" + data.output['name']);
+					account.hide();
+					$('.nav-container-maps .nav-container-options').append(map);
+					account.slideDown(500);
+
+					$(document).closeSubNav();
+					*/
+				} else {
+					$('.sub-nav .message').addClass('message-error');
+					$('.sub-nav .message').html(data.output);
+				}
+			}
+		});
+	});
 });

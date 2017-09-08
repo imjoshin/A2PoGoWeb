@@ -3,35 +3,35 @@
 <h3>Days Active</h3>
 <table>
 	<tr>
-		<td><input type="checkbox" name="days['s']" value="Sunday" /></td>
+		<td><input type="checkbox" name="days[s]" /></td>
 		<td>Sunday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['m']" value="Monday" /></td>
+		<td><input type="checkbox" name="days[m]" /></td>
 		<td>Monday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['t']" value="Tuesday" /></td>
+		<td><input type="checkbox" name="days[t]" /></td>
 		<td>Tuesday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['w']" value="Wednesday" /></td>
+		<td><input type="checkbox" name="days[w]" /></td>
 		<td>Wednesday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['h']" value="Thursday" /></td>
+		<td><input type="checkbox" name="days[h]" /></td>
 		<td>Thursday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['f']" value="Friday" /></td>
+		<td><input type="checkbox" name="days[f]" /></td>
 		<td>Friday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['a']" value="Saturday" /></td>
+		<td><input type="checkbox" name="days[a]" /></td>
 		<td>Saturday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days['a']" value="Sunday" /></td>
+		<td><input type="checkbox" name="days[a]" /></td>
 		<td>Sunday</td>
 	</tr>
 </table>
@@ -43,27 +43,29 @@
 </table>
 <h3>Notifications</h3>
 <h4>Pokemon</h4>
+<br/>
 <a class="btn btn-pokemon-select">Select Pokemon</a>
+<input type="hidden" name="pokemon-selected" id="pokemon-selected" value="" />
 <h4>Raids</h4>
 <table>
 	<tr>
-		<td><input type="checkbox" name="raids['1']" value="Sunday" /></td>
+		<td><input type="checkbox" name="raids[1]" /></td>
 		<td>Level 1</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="raids['2']" value="Monday" /></td>
+		<td><input type="checkbox" name="raids[2]" /></td>
 		<td>Level 2</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="raids['3']" value="Tuesday" /></td>
+		<td><input type="checkbox" name="raids[3]" /></td>
 		<td>Level 3</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="raids['4']" value="Wednesday" /></td>
+		<td><input type="checkbox" name="raids[4]" /></td>
 		<td>Level 4</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="raids['5']" value="Thursday" /></td>
+		<td><input type="checkbox" name="raids[5]" /></td>
 		<td>Level 5</td>
 	</tr>
 </table>

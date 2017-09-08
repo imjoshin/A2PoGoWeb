@@ -36,8 +36,26 @@ function unserialize_form($array)
 	foreach(explode('&', $array) as $value)
 	{
 		$value1 = explode('=', $value);
-		$data[urldecode($value1[0])] = urldecode($value1[1]);
+		$key = urldecode($value1[0]);
+		$value = urldecode($value1[1]);
+		if (preg_match('/\[.+\]/', $key, $match))
+		{
+			$arrayName = str_replace($match[0], '', $key);
+			$arrayKey = str_replace(array('[', ']'), '', $match[0]);
+
+			if (!isset($data[$arrayName]))
+			{
+				$data[$arrayName] = array();
+			}
+
+			$data[$arrayName][$arrayKey] = $value;
+		}
+		else
+		{
+			$data[$key] = $value;
+		}
 	}
+
 	return $data;
 }
 
