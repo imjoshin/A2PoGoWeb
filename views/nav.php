@@ -22,6 +22,17 @@
 			<label>Maps</label>
 			<i class='btn-add fa fa-plus-square-o  <?php echo count($maps) ? "" : "bouncy"; ?>' <?php echo count($accounts) ? "" : "style='display: none;'"; ?> data-name="Add Map" data-target="map"></i>
 			<div class="nav-container-options">
+				<?php
+					foreach ($maps as $map)
+					{
+
+						echo "
+						<div class='nav-container-options-item' data-id='{$map['id']}'>
+							<i class='fa {$map['icon']}' aria-hidden='true'></i>
+							{$map['name']}
+						</div>";
+					}
+				?>
 			</div>
 		</div>
 	</div>

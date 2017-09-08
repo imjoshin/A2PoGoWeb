@@ -3,35 +3,31 @@
 <h3>Days Active</h3>
 <table>
 	<tr>
-		<td><input type="checkbox" name="days[s]" /></td>
-		<td>Sunday</td>
-	</tr>
-	<tr>
-		<td><input type="checkbox" name="days[m]" /></td>
+		<td><input type="checkbox" name="days[1]" /></td>
 		<td>Monday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[t]" /></td>
+		<td><input type="checkbox" name="days[2]" /></td>
 		<td>Tuesday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[w]" /></td>
+		<td><input type="checkbox" name="days[3]" /></td>
 		<td>Wednesday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[h]" /></td>
+		<td><input type="checkbox" name="days[4]" /></td>
 		<td>Thursday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[f]" /></td>
+		<td><input type="checkbox" name="days[5]" /></td>
 		<td>Friday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[a]" /></td>
+		<td><input type="checkbox" name="days[6]" /></td>
 		<td>Saturday</td>
 	</tr>
 	<tr>
-		<td><input type="checkbox" name="days[a]" /></td>
+		<td><input type="checkbox" name="days[7]" /></td>
 		<td>Sunday</td>
 	</tr>
 </table>

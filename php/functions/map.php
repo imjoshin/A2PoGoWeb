@@ -27,10 +27,11 @@ class Map
 			return array('success'=>false, 'output'=>"Enter a valid end time.");
 		}
 
-		$days = isset($form['days']) ? implode('', array_map('strtoupper', array_keys($form['days']))) : "";
+		$days = isset($form['days']) ? implode(',', array_keys($form['days'])) : "";
 		$accounts = isset($form['accounts']) ? implode(',', array_keys($form['accounts'])) : "";
 		$raids = isset($form['raids']) ? implode(',', array_keys($form['raids'])) : "";
 
+		db_query("INSERT INTO map(user_id, name, accounts, pokemon, raids, days, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $accounts, $form['pokemon-selected'], $raids, $days, $form['start-time'], $form['end-time']));
 	}
 }
 

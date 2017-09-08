@@ -4,7 +4,7 @@ require 'auth.php';
 function init()
 {
 	$accounts = db_query("SELECT id, name, address, type FROM account WHERE user_id = ?", array($_SESSION['id']));
-	$maps = db_query("SELECT id, name FROM map WHERE user_id = ?", array($_SESSION['id']));
+	$maps = db_query("SELECT id, name, days, start_time, end_time FROM map WHERE user_id = ?", array($_SESSION['id']));
 
 	foreach ($accounts as &$account)
 	{
@@ -25,6 +25,24 @@ function init()
 				break;
 		}
 		$account['icon'] = $icon;
+	}
+
+	foreach ($maps as &$map)
+	{
+		$icon = "fa-map-o";
+		if (in_array(date('N', strtotime(date('l'))), explode(',', $map['days'])))
+		{
+			$now = new DateTime();
+			$start = new DateTime($map['start_time']);
+			$end = new DateTime($map['end_time']);
+
+			if ($start <= $now && $now <= $end)
+			{
+				$icon = "fa-map";
+			}
+		}
+
+		$map['icon'] = $icon;
 	}
 
 	return array("accounts"=>$accounts, "maps"=>$maps);
