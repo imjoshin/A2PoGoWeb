@@ -14,7 +14,9 @@ session_start();
 
 if (!isset($_SESSION['id']) && !in_array(strtolower($_POST['call']), array("login", "register", "check")))
 {
-	$ret = array("success"=>false, "output"=>"Session expired. Please refresh.");
+	$ret = array("success"=>false, "output"=>array(
+		"message"=>"Session expired. Please refresh."
+	));
 	return json_encode($ret);
 }
 
@@ -28,7 +30,6 @@ if (isset($_POST['form']))
 switch(strtolower($_POST['call']))
 {
 	case 'check':
-		error_log($_SESSION['id'] != $_POST['user'] ? "true" : "false");
 		$ret = array("success"=>true, "output"=>array(
 			"expired"=>(!isset($_SESSION['id']) || (isset($_POST['user']) && $_SESSION['id'] != $_POST['user'])),
 			"user"=>$_SESSION['id']
@@ -47,8 +48,8 @@ switch(strtolower($_POST['call']))
 	case 'verify':
 		$ret = Account::sendVerificationCode($_POST);
 		break;
-	case 'add_account':
-		$ret = Account::addAccount($_POST);
+	case 'save_account':
+		$ret = Account::saveAccount($_POST);
 		break;
 	case 'save_map':
 		$ret = Map::saveMap($_POST);

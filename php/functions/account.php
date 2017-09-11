@@ -75,7 +75,7 @@ class Account
 		}
 	}
 
-	public static function addAccount($form)
+	public static function saveAccount($form)
 	{
 		$name = trim($form['name']);
 
@@ -86,7 +86,15 @@ class Account
 			));
 		}
 
-		$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+		if ($form['new'])
+		{
+			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+		}
+		else
+		{
+			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ? AND id != ?", array($name, $_SESSION['id'], $form['id']));
+		}
+
 		if (count($namecheck))
 		{
 			return array('success'=>false, 'output'=>array(
@@ -94,33 +102,40 @@ class Account
 			));
 		}
 
-		if ($form['type'] === 'Phone' || $form['type'] === 'Email')
+		if ($form['type'] === 'phone' || $form['type'] === 'email')
 		{
-			if ($form['type'] === 'Phone')
+			if ($form['new'])
 			{
-				$address = trim($form['number'] . '@' . $form['carrier']);
-			}
-			else {
-				$address = trim($form['address']);
-			}
+				if ($form['type'] === 'Phone')
+				{
+					$address = trim($form['number'] . '@' . $form['carrier']);
+				}
+				else {
+					$address = trim($form['address']);
+				}
 
-			$codecheck = db_query("SELECT address FROM verification WHERE address = ? AND code = ?", array($address, $form['verification']));
-			if (!count($codecheck))
+				$codecheck = db_query("SELECT address FROM verification WHERE address = ? AND code = ?", array($address, $form['verification']));
+				if (!count($codecheck))
+				{
+					return array('success'=>false, 'output'=>array(
+						"message"=>"Invalid verification code."
+					));
+				}
+
+				db_query("INSERT INTO account(user_id, name, address, type) VALUES (?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type'])));
+				db_query("DELETE FROM verification WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
+			}
+			else
 			{
-				return array('success'=>false, 'output'=>array(
-					"message"=>"Invalid verification code."
-				));
+				db_query("UPDATE account SET name = ? WHERE id = ? AND user_id = ?", array($name, $form['id'], $_SESSION['id']));
 			}
-
-			db_query("INSERT INTO account(user_id, name, address, type) VALUES (?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type'])));
-			db_query("DELETE FROM verification WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
 
 		}
-		elseif ($form['type'] === "Slack" || $form['type'] === "Discord")
+		elseif ($form['type'] === "slack" || $form['type'] === "discord")
 		{
 			$hook_format = array(
-				"Slack"=>"https://hooks.slack.com/services",
-				"Discord"=>"https://discordapp.com/api/webhooks"
+				"slack"=>"https://hooks.slack.com/services",
+				"discord"=>"https://discordapp.com/api/webhooks"
 			);
 
 			// check if valid webhook format
@@ -140,7 +155,14 @@ class Account
 
 			$extra = json_encode(array('channel'=>$form['channel']));
 
-			db_query("INSERT INTO account(user_id, name, address, type, extra) VALUES (?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $form['webhook'], strtolower($form['type']), $extra));
+			if ($form['new'])
+			{
+				db_query("INSERT INTO account(user_id, name, address, type, extra) VALUES (?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $form['webhook'], strtolower($form['type']), $extra));
+			}
+			else
+			{
+				db_query("UPDATE account SET name = ?, address = ?, extra = ? WHERE id = ? AND user_id = ?", array($name, $form['webhook'], $extra, $form['id'], $_SESSION['id']));
+			}
 		}
 
 		$icon = "fa-question-circle-o";
@@ -160,9 +182,19 @@ class Account
 				break;
 		}
 
-		$account = db_query("SELECT * FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+		if ($form['new'])
+		{
+			$account = db_query("SELECT * FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+		}
+		else
+		{
+			$account = db_query("SELECT * FROM account WHERE id = ? AND user_id = ?", array($form['id'], $_SESSION['id']));
+		}
 
-		return array("success"=>true, "output"=>array("id"=>$account['id'], "name"=>$name, "icon"=>"$icon"));
+		return array("success"=>true, "output"=>array(
+			"fields"=>formatAccount($account[0]),
+			"new"=>($form['new'] ? true : false)
+		));
 	}
 }
 

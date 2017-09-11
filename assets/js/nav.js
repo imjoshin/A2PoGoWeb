@@ -4,6 +4,8 @@ $().ready(function() {
 
 	$.fn.extend({
 		openNavElement: function() {
+			$('.sub-nav-form').trigger("reset");
+
 			if ($(this).is('.btn-add')) {
 				openAdd($(this));
 			} else if ($(this).is('.nav-container label')) {
@@ -16,13 +18,18 @@ $().ready(function() {
 			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 
-			$('.sub-nav-form').trigger("reset");
 			$('.sub-nav-form select').trigger("change");
 			callback();
 		}
 	});
 
 	function openAdd(button) {
+		// new map/account
+		$('.sub-nav').find('input[name="new"]').val(1);
+		$('.sub-nav .non-editable-input').prop("disabled", false);
+		$(".sub-nav .hidden-edit-input").show();
+		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
+
 		if (!button.parent().hasClass('nav-container--active')) {
 			$('.nav-container--active .nav-container-options').slideUp(300);
 			$('.nav-container--active').removeClass('nav-container--active');
@@ -73,16 +80,30 @@ $().ready(function() {
 
 	// Map/Account item
 	function openItem(item) {
+		// not new map/account
+		$('.sub-nav').find('input[name="new"]').val(0);
+		$('.sub-nav .non-editable-input').prop("disabled", true);
+		$(".sub-nav .hidden-edit-input").hide();
+
 		if (item.hasClass('nav-container-options-item--active')) {
 			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
 			item.removeClass('nav-container-options-item--active');
-		} else {
-			$('.sub-nav').animate({left: '0px'}, 300);
-			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
-			item.addClass('nav-container-options-item--active');
+			return;
 		}
 
+		$('.sub-nav').animate({left: '0px'}, 300);
+		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
+		item.addClass('nav-container-options-item--active');
+
+		$.each($.parseJSON(item.attr('data-fields')), function(input, value) {
+			$('.sub-nav #' + input).val(value);
+		});
+
 		if (item.parents('.nav-container-accounts').length) {
+			$('.sub-nav #type').trigger('change');
+
+			$('.sub-nav-form').hide();
+			$('.sub-nav-form-account').show();
 
 		} else if (item.parents('.nav-container-maps').length) {
 			$('#map-accounts').empty();
@@ -96,6 +117,9 @@ $().ready(function() {
 				");
 				$('#map-accounts').append(row);
 			});
+
+			$('.sub-nav-form').hide();
+			$('.sub-nav-form-map').show();
 		}
 	}
 });

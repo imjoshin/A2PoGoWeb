@@ -8,9 +8,8 @@
 				<?php
 					foreach ($accounts as $account)
 					{
-
 						echo "
-						<div class='nav-container-options-item' data-id='{$account['id']}'>
+						<div class='nav-container-options-item' data-id='{$account['id']}' data-fields='" . json_encode($account) . "'>
 							<i class='fa {$account['icon']}' aria-hidden='true'></i>
 							{$account['name']}
 						</div>";
@@ -25,7 +24,6 @@
 				<?php
 					foreach ($maps as $map)
 					{
-
 						echo "
 						<div class='nav-container-options-item' data-id='{$map['id']}'>
 							<i class='fa {$map['icon']}' aria-hidden='true'></i>

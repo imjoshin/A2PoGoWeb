@@ -3,29 +3,66 @@ require 'auth.php';
 
 function init()
 {
-	$accounts = db_query("SELECT id, name, address, type FROM account WHERE user_id = ?", array($_SESSION['id']));
-	$maps = db_query("SELECT id, name, days, start_time, end_time FROM map WHERE user_id = ?", array($_SESSION['id']));
+	return array("accounts"=>getAccounts(), "maps"=>getMaps());
+}
 
-	foreach ($accounts as &$account)
+function formatAccount($account)
+{
+	$newAccount = array();
+	$extra = json_decode($account['extra']);
+	$newAccount['id'] = $account['id'];
+	$newAccount['name'] = $account['name'];
+	$newAccount['type'] = $account['type'];
+	$newAccount['icon'] = "fa-question-circle-o";
+
+	switch ($account['type'])
 	{
-		$icon = "fa-question-circle-o";
-		switch ($account['type'])
-		{
-			case 'phone':
-				$icon = 'fa-mobile';
-				break;
-			case 'email':
-				$icon = 'fa-envelope-o';
-				break;
-			case 'slack':
-				$icon = 'fa-slack';
-				break;
-			case 'discord':
-				$icon = 'fa-user-circle';
-				break;
-		}
-		$account['icon'] = $icon;
+		case 'email':
+			$newAccount['address'] = $account['address'];
+			$newAccount['icon'] = 'fa-envelope-o';
+			break;
+		case 'phone':
+			$address = explode('@', $account['address']);
+			$newAccount['number'] = $address[0];
+			$newAccount['carrier'] = $address[1];
+			$newAccount['icon'] = 'fa-mobile';
+			break;
+		case 'discord':
+			$newAccount['webhook'] = $account['address'];
+			$newAccount['channel'] = $extra['channel'];
+			$newAccount['icon'] = 'fa-user-circle';
+			break;
+		case 'slack':
+			$newAccount['webhook'] = $account['address'];
+			$newAccount['channel'] = $extra->channel;
+			$newAccount['icon'] = 'fa-slack';
+			break;
 	}
+
+	return $newAccount;
+}
+
+function getAccounts()
+{
+	$accounts = db_query("SELECT * FROM account WHERE user_id = ?", array($_SESSION['id']));
+	$returnAccounts = array();
+
+	foreach ($accounts as $account)
+	{
+		$returnAccounts[] = formatAccount($account);
+	}
+
+	return $returnAccounts;
+}
+
+function formatMap()
+{
+
+}
+
+function getMaps()
+{
+	$maps = db_query("SELECT id, name, days, start_time, end_time FROM map WHERE user_id = ?", array($_SESSION['id']));
 
 	foreach ($maps as &$map)
 	{
@@ -45,7 +82,7 @@ function init()
 		$map['icon'] = $icon;
 	}
 
-	return array("accounts"=>$accounts, "maps"=>$maps);
+	return $maps;
 }
 
 function unserialize_form($array)

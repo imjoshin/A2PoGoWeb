@@ -65,5 +65,7 @@
 		<td>Level 5</td>
 	</tr>
 </table>
+<input type="hidden" name="new" value="1">
+<input type="hidden" id="id" name="id" value="-1">
 <br/><br/>
 <a class="btn btn-save">Save</a>
