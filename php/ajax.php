@@ -28,7 +28,11 @@ if (isset($_POST['form']))
 switch(strtolower($_POST['call']))
 {
 	case 'check':
-		$ret = array("success"=>true, "expired"=>(!isset($_SESSION['id'])));
+		error_log($_SESSION['id'] != $_POST['user'] ? "true" : "false");
+		$ret = array("success"=>true, "output"=>array(
+			"expired"=>(!isset($_SESSION['id']) || (isset($_POST['user']) && $_SESSION['id'] != $_POST['user'])),
+			"user"=>$_SESSION['id']
+		));
 		break;
 	case 'login':
 		error_log("logout");

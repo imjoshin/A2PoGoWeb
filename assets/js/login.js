@@ -11,16 +11,18 @@ $().ready(function() {
 			url: "php/ajax.php",
 			data: {
 				call: 'check',
-				test: 'test'
+				user: window.user
 			},
 			success: function(data) {
-				if (data.expired) {
+				if (data.output['expired']) {
 					location.reload();
+				} else {
+					window.user = data.output['user'];
 				}
 			}
 		});
 
-		setTimeout(checkSession, 10 * 1000);
+		setTimeout(checkSession, 30 * 1000);
 	}
 
 	$('.login-modal-tabs-item').on('click', function() {
