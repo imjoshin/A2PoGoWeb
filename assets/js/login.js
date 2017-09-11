@@ -80,7 +80,7 @@ $().ready(function() {
 					location.reload();
 				} else {
 					$('.login-modal .message').addClass('message-error');
-					$('.login-modal .message').html(data.output);
+					$('.login-modal .message').html(data.output['message']);
 				}
 			}
 		});

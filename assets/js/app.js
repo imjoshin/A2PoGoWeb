@@ -55,13 +55,13 @@ $().ready(function() {
 					button.hide();
 					$('#verification').show();
 				} else {
-					if (data.output == "Verification code has already sent.") {
+					if (data.output['message'] == "Verification code has already sent.") {
 						button.hide();
 						$('#verification').show();
 					}
 
 					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output);
+					$('.sub-nav .message').html(data.output['message']);
 				}
 			}
 		});
@@ -101,7 +101,7 @@ $().ready(function() {
 					});
 				} else {
 					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output);
+					$('.sub-nav .message').html(data.output['message']);
 				}
 			}
 		});
@@ -137,7 +137,7 @@ $().ready(function() {
 					*/
 				} else {
 					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output);
+					$('.sub-nav .message').html(data.output['message']);
 				}
 			}
 		});

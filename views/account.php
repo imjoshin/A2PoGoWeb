@@ -49,5 +49,5 @@
 	<h3>Channel ID</h3>
 	<input type="text" id="channel" name="channel">
 </span>
-<br/>
+<br/><br/>
 <a class="btn btn-save">Save</a>

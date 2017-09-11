@@ -6,14 +6,18 @@ class User
 	{
 		if (isset($_SESSION['id']))
 		{
-			return array('success'=>false, 'output'=>"Already logged in.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Already logged in."
+			));
 		}
 
 		$user = db_query("SELECT id, username FROM user WHERE username = ? and password = ?", array(strtolower($username), $password));
 
 		if (!count($user))
 		{
-			return array('success'=>false, 'output'=>"Invalid username or password.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Invalid username or password."
+			));
 		}
 
 		session_start();
@@ -35,33 +39,43 @@ class User
 	{
 		if (isset($_SESSION['id']))
 		{
-			return array('success'=>false, 'output'=>"Already logged in.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Already logged in."
+			));
 		}
 
 		// username starts/ends with alphanumeric, 5-20 chars
 		$username = trim($username);
 		if (!preg_match('/[a-z]{1}[a-z0-9._-]{3,18}[a-z0-9]{1}$/', $username))
 		{
-			return array('success'=>false, 'output'=>'Invalid username.');
+			return array('success'=>false, 'output'=>array(
+				"message"=>'Invalid username.'
+			));
 		}
 
 		$usercheck = db_query("SELECT username FROM user WHERE username = ?", array($username));
 
 		if (count($usercheck))
 		{
-			return array('success'=>false, 'output'=>"Username is already taken.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Username is already taken."
+			));
 		}
 
 		// password has no spaces and is 6-32 characters
 		if (preg_match('/\s/', $username) || strlen($password) < 6 || strlen($password) > 32)
 		{
-			return array('success'=>false, 'output'=>'Invalid password.');
+			return array('success'=>false, 'output'=>array(
+				"message"=>'Invalid password.'
+			));
 		}
 
 		// password has no spaces and is 8-32 characters
 		if ($password != $confirm_password)
 		{
-			return array('success'=>false, 'output'=>"Passwords don't match.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Passwords don't match."
+			));
 		}
 
 		if (REQUIRE_INVITE)
@@ -70,7 +84,9 @@ class User
 
 			if (!count($invitecheck))
 			{
-				return array('success'=>false, 'output'=>"Invalid invite code.");
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Invalid invite code."
+				));
 			}
 		}
 

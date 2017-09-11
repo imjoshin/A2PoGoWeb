@@ -11,26 +11,34 @@ class Account
 			$number = str_replace(array('(', ')', ' ', '-',), '', $form['number']);
 			if (!is_numeric($number) || strlen($number) != 10)
 			{
-				return array('success'=>false, 'output'=>"Invalid phone number.");
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Invalid phone number."
+				));
 			}
 			$address = $number . "@" . $form['carrier'];
 		}
 
 		if (!filter_var($address, FILTER_VALIDATE_EMAIL))
 		{
-			return array('success'=>false, 'output'=>"Invalid address.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Invalid address."
+			));
 		}
 
 		$namecheck = db_query("SELECT name FROM account WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
 		if (count($namecheck))
 		{
-			return array('success'=>false, 'output'=>"This address is already in use.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"This address is already in use."
+			));
 		}
 
 		$usercheck = db_query("SELECT address FROM verification WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
 		if (count($usercheck))
 		{
-			return array('success'=>false, 'output'=>"Verification code has already sent.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Verification code has already sent."
+			));
 		}
 
 		$seed = str_split('ABCDEFGHIJKLMNPQRSTUVWXYZ123456789');
@@ -58,7 +66,9 @@ class Account
 
 		if(!$mail->Send()) {
 			error_log("Failed to send verification code to $address. " . $mail->ErrorInfo);
-			return array("success"=>false, "output"=>"Failed to send message.");
+			return array("success"=>false, "output"=>array(
+				"message"=>"Failed to send message."
+			));
 		} else {
 			db_query("INSERT INTO verification(code, address, user_id) VALUES (?, ?, ?)", array($code, $address, $_SESSION['id']));
 			return array("success"=>true);
@@ -71,13 +81,17 @@ class Account
 
 		if (!preg_match('/[a-zA-Z0-9 ._-]{1,32}$/', $name))
 		{
-			return array('success'=>false, 'output'=>'Invalid name.');
+			return array('success'=>false, 'output'=>array(
+				"message"=>'Invalid name.'
+			));
 		}
 
 		$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
 		if (count($namecheck))
 		{
-			return array('success'=>false, 'output'=>"This name is already in use.");
+			return array('success'=>false, 'output'=>array(
+				"message"=>"This name is already in use."
+			));
 		}
 
 		if ($form['type'] === 'Phone' || $form['type'] === 'Email')
@@ -93,7 +107,9 @@ class Account
 			$codecheck = db_query("SELECT address FROM verification WHERE address = ? AND code = ?", array($address, $form['verification']));
 			if (!count($codecheck))
 			{
-				return array('success'=>false, 'output'=>"Invalid verification code.");
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Invalid verification code."
+				));
 			}
 
 			db_query("INSERT INTO account(user_id, name, address, type) VALUES (?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type'])));
@@ -110,12 +126,16 @@ class Account
 			// check if valid webhook format
 			if (substr($form['webhook'], 0, strlen($hook_format[$form['type']])) !== $hook_format[$form['type']])
 			{
-				return array('success'=>false, 'output'=>"Invalid webhook format.");
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Invalid webhook format."
+				));
 			}
 
 			if (strlen($form['channel']) < 8)
 			{
-				return array('success'=>false, 'output'=>"Invalid channel ID.");
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Invalid channel ID."
+				));
 			}
 
 			$extra = json_encode(array('channel'=>$form['channel']));
