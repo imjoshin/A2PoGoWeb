@@ -11,9 +11,11 @@ if (!isset($_POST['call']))
 }
 
 session_start();
-if (!isset($_SESSION['id']) && !in_array(strtolower($_POST['call']), array("login", "register")))
+
+if (!isset($_SESSION['id']) && !in_array(strtolower($_POST['call']), array("login", "register", "check")))
 {
-	return json_encode(array("success"=>false, "output"=>"Session expired. Please refresh."));
+	$ret = array("success"=>false, "output"=>"Session expired. Please refresh.");
+	return json_encode($ret);
 }
 
 // look for serialized form
@@ -25,7 +27,11 @@ if (isset($_POST['form']))
 
 switch(strtolower($_POST['call']))
 {
+	case 'check':
+		$ret = array("success"=>true, "expired"=>(!isset($_SESSION['id'])));
+		break;
 	case 'login':
+		error_log("logout");
 		$ret = User::login($_POST['username'], $_POST['password']);
 		break;
 	case 'logout':

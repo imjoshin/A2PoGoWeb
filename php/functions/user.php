@@ -4,6 +4,11 @@ class User
 {
 	public static function login($username, $password)
 	{
+		if (isset($_SESSION['id']))
+		{
+			return array('success'=>false, 'output'=>"Already logged in.");
+		}
+
 		$user = db_query("SELECT id, username FROM user WHERE username = ? and password = ?", array(strtolower($username), $password));
 
 		if (!count($user))
@@ -21,12 +26,18 @@ class User
 	public static function logout()
 	{
 		session_start();
+		session_unset();
 		session_destroy();
 		return array('success'=>true);
 	}
 
 	public static function register($username, $password, $confirm_password, $invitation_code = null)
 	{
+		if (isset($_SESSION['id']))
+		{
+			return array('success'=>false, 'output'=>"Already logged in.");
+		}
+
 		// username starts/ends with alphanumeric, 5-20 chars
 		$username = trim($username);
 		if (!preg_match('/[a-z]{1}[a-z0-9._-]{3,18}[a-z0-9]{1}$/', $username))

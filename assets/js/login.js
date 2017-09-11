@@ -1,5 +1,28 @@
 $().ready(function() {
 
+	if (!$('.login-modal').length) {
+		checkSession();
+	}
+
+	function checkSession() {
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "php/ajax.php",
+			data: {
+				call: 'check',
+				test: 'test'
+			},
+			success: function(data) {
+				if (data.expired) {
+					location.reload();
+				}
+			}
+		});
+
+		setTimeout(checkSession, 10 * 1000);
+	}
+
 	$('.login-modal-tabs-item').on('click', function() {
 		if (!$(this).hasClass('login-modal-tabs-item--active')) {
 			$('.login-modal-tabs-item--active').removeClass('login-modal-tabs-item--active');
