@@ -13,12 +13,12 @@ $().ready(function() {
 			} else if ($(this).is('.nav-container-options-item')) {
 				openItem($(this));
 			}
+
+			$('.sub-nav-form select').change();
 		},
 		closeSubNav: function(callback) {
 			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
 			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
-
-			$('.sub-nav-form select').trigger("change");
 			callback();
 		}
 	});
@@ -95,9 +95,7 @@ $().ready(function() {
 		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
 		item.addClass('nav-container-options-item--active');
 
-		$.each($.parseJSON(item.attr('data-fields')), function(input, value) {
-			$('.sub-nav #' + input).val(value);
-		});
+		var fields = $.parseJSON(item.attr('data-fields'));
 
 		if (item.parents('.nav-container-accounts').length) {
 			$('.sub-nav #type').trigger('change');
@@ -111,15 +109,29 @@ $().ready(function() {
 			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
 				var row = $(" \
 					<tr> \
-						<td><input type='checkbox' name=\"account[" + $(this).data('id') + "]\" /></td> \
+						<td><input type='checkbox' id=\"accounts[" + $(this).data('id') + "]\" name=\"accounts[" + $(this).data('id') + "]\" /></td> \
 						<td>" + $(this).html() + "</td> \
 					</tr> \
 				");
 				$('#map-accounts').append(row);
 			});
 
+			// updateMonForm(fields['pokemon']);
+
 			$('.sub-nav-form').hide();
 			$('.sub-nav-form-map').show();
 		}
+
+		// Set fields on form
+		$.each(fields, function(input, value) {
+			input = input.replace('[', '\\[').replace(']', '\\]');
+			if ($('.sub-nav #' + input).attr("type") == "checkbox") {
+				$('.sub-nav #' + input).prop('checked', value == "on");
+			} else {
+				$('.sub-nav #' + input).val(value);
+			}
+		});
+
+		$('.sub-nav-header').text('Editing "' + fields['name'] + '"');
 	}
 });

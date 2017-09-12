@@ -25,7 +25,7 @@
 					foreach ($maps as $map)
 					{
 						echo "
-						<div class='nav-container-options-item' data-id='{$map['id']}'>
+						<div class='nav-container-options-item' data-id='{$map['id']}'  data-fields='" . json_encode($map) . "'>
 							<i class='fa {$map['icon']}' aria-hidden='true'></i>
 							{$map['name']}
 						</div>";

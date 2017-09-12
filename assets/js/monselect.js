@@ -6,7 +6,7 @@ $().ready(function() {
 
 	$('.mon-select-modal-images-item').on('click', function() {
 		$(this).toggleClass('mon-select-modal-images-item--active');
-		updateForm();
+		updateMonForm();
 	});
 
 	$('.mon-select-modal-categories .btn').on('click', function() {
@@ -23,10 +23,10 @@ $().ready(function() {
 			});
 		}
 
-		updateForm($(this).data('mon'));
+		updateMonForm($(this).data('mon'));
 	});
 
-	function updateForm(pokemon) {
+	function updateMonForm(pokemon) {
 		pokemon = pokemon || "";
 		var buttonText = 'Select Pokemon' + ($('.mon-select-modal-images-item--active').length > 0 ? ' (' + $('.mon-select-modal-images-item--active').length + ')' : '');
 		$('.btn-pokemon-select').html(buttonText);

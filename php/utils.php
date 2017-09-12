@@ -55,34 +55,80 @@ function getAccounts()
 	return $returnAccounts;
 }
 
-function formatMap()
+function formatMap($map)
 {
+	$newMap = array();
+	$newMap['id'] = $map['id'];
+	$newMap['name'] = $map['name'];
+	$newMap['start-time'] = $map['start_time'];
+	$newMap['end-time'] = $map['end_time'];
+	$newMap['pokemon'] = $map['pokemon'];
 
+	if (strpos($map['days'], ",") === false)
+	{
+		$newMap["days[{$map['days']}]"] = "on";
+	}
+	else
+	{
+		foreach(explode(',', $map['days']) as $day)
+		{
+			$newMap["days[{$day}]"] = "on";
+		}
+	}
+
+	if (strpos($map['accounts'], ",") === false)
+	{
+		$newMap["accounts[{$map['accounts']}]"] = "on";
+	}
+	else
+	{
+		foreach(explode(',', $map['accounts']) as $account)
+		{
+			$newMap["accounts[{$account}]"] = "on";
+		}
+	}
+
+	if (strpos($map['raids'], ",") === false)
+	{
+		$newMap["raids[{$map['raids']}]"] = "on";
+	}
+	else
+	{
+		foreach(explode(',', $map['raids']) as $raid)
+		{
+			$newMap["raids[{$raid}]"] = "on";
+		}
+	}
+
+
+	$icon = "fa-map-o";
+	if (in_array(date('N', strtotime(date('l'))), explode(',', $map['days'])))
+	{
+		$now = new DateTime();
+		$start = new DateTime($map['start_time']);
+		$end = new DateTime($map['end_time']);
+
+		if ($start <= $now && $now <= $end)
+		{
+			$icon = "fa-map";
+		}
+	}
+
+	$newMap['icon'] = $icon;
+	return $newMap;
 }
 
 function getMaps()
 {
-	$maps = db_query("SELECT id, name, days, start_time, end_time FROM map WHERE user_id = ?", array($_SESSION['id']));
+	$maps = db_query("SELECT * FROM map WHERE user_id = ?", array($_SESSION['id']));
+	$returnMaps = array();
 
-	foreach ($maps as &$map)
+	foreach ($maps as $map)
 	{
-		$icon = "fa-map-o";
-		if (in_array(date('N', strtotime(date('l'))), explode(',', $map['days'])))
-		{
-			$now = new DateTime();
-			$start = new DateTime($map['start_time']);
-			$end = new DateTime($map['end_time']);
-
-			if ($start <= $now && $now <= $end)
-			{
-				$icon = "fa-map";
-			}
-		}
-
-		$map['icon'] = $icon;
+		$returnMaps[] = formatMap($map);
 	}
 
-	return $maps;
+	return $returnMaps;
 }
 
 function unserialize_form($array)
