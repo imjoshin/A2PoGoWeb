@@ -77,7 +77,10 @@ $().ready(function() {
 		form = $('.sub-nav-form-account');
 
 		$('.sub-nav .non-editable-input').prop('disabled', false);
+		form.append("<input type='hidden' class='temp' name='new' value='" + (window.new ? 1 : 0) + "'>");
+		form.append("<input type='hidden' class='temp' name='id' value='" + window.id + "'>");
 		serialized = form.serialize();
+		$("input.temp").remove();
 		$('.sub-nav .non-editable-input').prop('disabled', true);
 
 		$.ajax({
@@ -127,13 +130,18 @@ $().ready(function() {
 	$('.sub-nav-form-map .btn-save').on('click', function() {
 		form = $('.sub-nav-form-map');
 
+		form.append("<input type='hidden' class='temp' name='new' value='" + (window.new ? 1 : 0) + "'>");
+		form.append("<input type='hidden' class='temp' name='id' value='" + window.id + "'>");
+		serialized = form.serialize();
+		$("input.temp").remove();
+
 		$.ajax({
 			type: "POST",
 			dataType: "json",
 			url: "php/ajax.php",
 			data: {
 				call: 'save_map',
-				form: form.serialize()
+				form: serialized
 			},
 			success: function(data) {
 				if (data.success) {

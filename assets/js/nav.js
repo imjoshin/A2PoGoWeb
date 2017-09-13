@@ -25,7 +25,7 @@ $().ready(function() {
 
 	function openAdd(button) {
 		// new map/account
-		$('.sub-nav').find('input[name="new"]').val(1);
+		window.new = true;
 		$('.sub-nav .non-editable-input').prop("disabled", false);
 		$(".sub-nav .hidden-edit-input").show();
 		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
@@ -81,7 +81,6 @@ $().ready(function() {
 	// Map/Account item
 	function openItem(item) {
 		// not new map/account
-		$('.sub-nav').find('input[name="new"]').val(0);
 		$('.sub-nav .non-editable-input').prop("disabled", true);
 		$(".sub-nav .hidden-edit-input").hide();
 
@@ -96,6 +95,9 @@ $().ready(function() {
 		item.addClass('nav-container-options-item--active');
 
 		var fields = $.parseJSON(item.attr('data-fields'));
+
+		window.new = false;
+		window.id = fields['id'];
 
 		if (item.parents('.nav-container-accounts').length) {
 			$('.sub-nav #type').trigger('change');

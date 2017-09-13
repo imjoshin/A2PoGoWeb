@@ -3,7 +3,7 @@
 class Map
 {
 	public static function saveMap($form)
-	{
+	{		
 		$name = trim($form['name']);
 
 		if (!preg_match('/[a-zA-Z0-9 ._-]{1,32}$/', $name))

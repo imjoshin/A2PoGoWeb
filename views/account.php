@@ -49,7 +49,5 @@
 	<h3>Channel ID</h3>
 	<input type="text" id="channel" name="channel">
 </span>
-<input type="hidden" name="new" value="1">
-<input type="hidden" id="id" name="id" value="-1">
 <br/><br/>
 <a class="btn btn-save">Save</a>
