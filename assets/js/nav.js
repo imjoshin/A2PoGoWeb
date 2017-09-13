@@ -4,13 +4,13 @@ $().ready(function() {
 
 	$.fn.extend({
 		openNavElement: function() {
-			$('.sub-nav-form').trigger("reset");
-
 			if ($(this).is('.btn-add')) {
+				$('.sub-nav-form').trigger("reset");
 				openAdd($(this));
 			} else if ($(this).is('.nav-container label')) {
 				openContainer($(this).parent());
 			} else if ($(this).is('.nav-container-options-item')) {
+				$('.sub-nav-form').trigger("reset");
 				openItem($(this));
 			}
 
@@ -116,7 +116,7 @@ $().ready(function() {
 				$('#map-accounts').append(row);
 			});
 
-			// updateMonForm(fields['pokemon']);
+			updateMonForm(fields['pokemon']);
 
 			$('.sub-nav-form').hide();
 			$('.sub-nav-form-map').show();

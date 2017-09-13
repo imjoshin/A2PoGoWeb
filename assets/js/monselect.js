@@ -25,18 +25,4 @@ $().ready(function() {
 
 		updateMonForm($(this).data('mon'));
 	});
-
-	function updateMonForm(pokemon) {
-		pokemon = pokemon || "";
-		var buttonText = 'Select Pokemon' + ($('.mon-select-modal-images-item--active').length > 0 ? ' (' + $('.mon-select-modal-images-item--active').length + ')' : '');
-		$('.btn-pokemon-select').html(buttonText);
-
-		if (!pokemon.length) {
-			$.each($(".mon-select-modal-images-item--active"), function(k, v) {
-				pokemon += ($(this).index('.mon-select-modal-images-item') + 1) + ",";
-			});
-		}
-
-		$('#pokemon-selected').val(pokemon);
-	}
 });

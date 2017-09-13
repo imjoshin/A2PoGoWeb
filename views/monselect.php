@@ -14,8 +14,8 @@
 				{
 					$file = 'dist/img/pokemon/' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
 					echo "
-						<div class='mon-select-modal-images-item'>
-							<div class='mon-select-modal-images-item-img' style='background-image: url($file);'></div>
+						<div class='mon-select-modal-images-item' data-id='$i'>
+							<div class='mon-select-modal-images-item-img'  style='background-image: url($file);'></div>
 						</div>
 					";
 				}

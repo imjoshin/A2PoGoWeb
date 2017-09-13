@@ -1,3 +1,22 @@
+function updateMonForm(pokemon) {
+	pokemon = pokemon || "";
+
+	if (pokemon.length) {
+		$('.mon-select-modal-images-item--active').removeClass('mon-select-modal-images-item--active');
+		$.each(pokemon.split(','), function(k, id) {
+			$(".mon-select-modal-images-item[data-id=" + id + "]").addClass('mon-select-modal-images-item--active');
+		});
+	} else {
+		$.each($(".mon-select-modal-images-item--active"), function(k, v) {
+			pokemon += ($(this).data('id')) + ",";
+		});
+	}
+
+	var buttonText = 'Select Pokemon' + ($('.mon-select-modal-images-item--active').length > 0 ? ' (' + $('.mon-select-modal-images-item--active').length + ')' : '');
+	$('.btn-pokemon-select').html(buttonText);
+
+	$('#pokemon-selected').val(pokemon);
+}
 
 function serializeArray(array) {
 	var ret = "";
