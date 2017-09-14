@@ -122,12 +122,12 @@ class Account
 					));
 				}
 
-				db_query("INSERT INTO account(user_id, name, address, type) VALUES (?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type'])));
+				db_query("INSERT INTO account(user_id, name, address, type, pokemon_format, raid_format) VALUES (?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type']), $form['pokemon-format'], $form['raid-format']));
 				db_query("DELETE FROM verification WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
 			}
 			else
 			{
-				db_query("UPDATE account SET name = ? WHERE id = ? AND user_id = ?", array($name, $form['id'], $_SESSION['id']));
+				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $form['id'], $_SESSION['id']));
 			}
 
 		}
@@ -153,7 +153,11 @@ class Account
 				));
 			}
 
-			$extra = json_encode(array('channel'=>$form['channel']));
+			$extra = json_encode(array(
+				'channel'=>$form['channel'],
+				'pokemon_user'=>$form['pokemon-user'],
+				'raid_user'=>$form['raid-user'],
+			));
 
 			if ($form['new'])
 			{
@@ -161,7 +165,7 @@ class Account
 			}
 			else
 			{
-				db_query("UPDATE account SET name = ?, address = ?, extra = ? WHERE id = ? AND user_id = ?", array($name, $form['webhook'], $extra, $form['id'], $_SESSION['id']));
+				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ?, extra = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $extra, $form['id'], $_SESSION['id']));
 			}
 		}
 

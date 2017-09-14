@@ -13,6 +13,8 @@ function formatAccount($account)
 	$newAccount['id'] = $account['id'];
 	$newAccount['name'] = $account['name'];
 	$newAccount['type'] = $account['type'];
+	$newAccount['pokemon-format'] = $account['pokemon_format'];
+	$newAccount['raid-format'] = $account['raid_format'];
 	$newAccount['icon'] = "fa-question-circle-o";
 
 	switch ($account['type'])
@@ -29,12 +31,16 @@ function formatAccount($account)
 			break;
 		case 'discord':
 			$newAccount['webhook'] = $account['address'];
-			$newAccount['channel'] = $extra['channel'];
+			$newAccount['channel'] = $extra->channel;
+			$newAccount['pokemon-user'] = $extra->pokemon_user;
+			$newAccount['raid-user'] = $extra->raid_user;
 			$newAccount['icon'] = 'fa-user-circle';
 			break;
 		case 'slack':
 			$newAccount['webhook'] = $account['address'];
 			$newAccount['channel'] = $extra->channel;
+			$newAccount['pokemon-user'] = $extra->pokemon_user;
+			$newAccount['raid-user'] = $extra->raid_user;
 			$newAccount['icon'] = 'fa-slack';
 			break;
 	}

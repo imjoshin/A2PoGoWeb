@@ -48,6 +48,18 @@
 	<input type="text" id="webhook" name="webhook">
 	<h3>Channel ID</h3>
 	<input type="text" id="channel" name="channel">
+	<h3>Pokemon User</h3>
+	<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%"><br/>
+	<span id="pokemon-user-preview"></span>
+	<h3>Raid User</h3>
+	<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)"><br/>
+	<span id="raid-user-preview"></span>
 </span>
+<h3>Pokemon Format</h3>
+<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
+<span id="pokemon-format-preview"></span>
+<h3>Raid Format</h3>
+<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%."><br/>
+<span id="raid-format-preview"></span>
 <br/><br/>
 <a class="btn btn-save">Save</a>

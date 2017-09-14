@@ -6,11 +6,13 @@ $().ready(function() {
 		openNavElement: function() {
 			if ($(this).is('.btn-add')) {
 				$('.sub-nav-form').trigger("reset");
+				$('.formatter').keyup();
 				openAdd($(this));
 			} else if ($(this).is('.nav-container label')) {
 				openContainer($(this).parent());
 			} else if ($(this).is('.nav-container-options-item')) {
 				$('.sub-nav-form').trigger("reset");
+				$('.formatter').keyup();
 				openItem($(this));
 			}
 

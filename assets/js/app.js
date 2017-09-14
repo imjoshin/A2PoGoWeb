@@ -42,6 +42,31 @@ $().ready(function() {
 		$('.sub-nav .message').empty();
 	});
 
+	$('.formatter').on('keyup', function() {
+		console.log("Press");
+		var format = $(this).val();
+		var variables = {
+			'%NAME%': 'Pikachu',
+			'%MAPNAME%': 'Test Map',
+			'%ENDTIME%': '2:34:56 PM',
+		}
+
+		if ($(this).attr('id').indexOf('raid') >= 0) {
+			variables['%GYMNAME%'] = "Brock's Gym";
+			variables['%STARTTIME%'] = '1:34:56 PM';
+			variables['%RAIDLEVEL%'] = '3';
+		}
+
+		$.each(variables, function (key, value) {
+			console.log("Replacing " + key + " with " + value);
+			format = format.replace(key, value);
+		});
+
+		console.log('Setting to #' + $(this).attr('id') + '-preview : ' + format);
+
+		$('#' + $(this).attr('id') + '-preview').text(format.length ? format : '');
+	});
+
 	// address verification
 	$('.sub-nav-form-address-verification .btn').on('click', function() {
 		button = $(this);
