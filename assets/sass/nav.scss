@@ -6,7 +6,6 @@ $nav-width: 400px;
 	height: 100%;
 	opacity: .98;
 	color: $white;
-	overflow-y: scroll;
 	width: $nav-width;
 	font-size: 18px;
 	float: left;
@@ -19,6 +18,12 @@ $nav-width: 400px;
 		background-repeat: no-repeat;
 		height: 150px;
 		margin-bottom: 30px;
+	}
+
+	&-scrollable {
+		height: calc(100% - 250px);
+		overflow-y: scroll;
+		padding-bottom: 50px;
 	}
 
 	&-tabs {
