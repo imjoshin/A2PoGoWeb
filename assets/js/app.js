@@ -3,8 +3,11 @@ $(document).foundation()
 $().ready(function() {
 	// mobile device
 	if (typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1) {
-		$("#map").parent().siblings().remove();
-		$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
+		//$("#map").parent().siblings().remove();
+		//$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
+		$('.nav-tabs-container[data="map"] .nav-tabs-container-buttons').hide();
+		$('.nav').css('width', '100%');
+		$('#login-wrapper-logo').hide();
 	}
 
 	$('.modal-wrapper:not(#login-wrapper)').on('click', function(e) {
