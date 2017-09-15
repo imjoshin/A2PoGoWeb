@@ -1,3 +1,5 @@
+$(document).foundation()
+
 $().ready(function() {
 	// mobile device
 	if (typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1) {
@@ -12,7 +14,7 @@ $().ready(function() {
 	});
 
 	// handle nav events
-	$('.nav-container .btn-add, .nav-container:not(.disabled) label, .nav-container-options-item').on('click', function() {
+	$('.nav-container .btn-add, .nav-tabs-item, .nav-container-options-item').on('click', function() {
 		$(this).openNavElement();
 	});
 

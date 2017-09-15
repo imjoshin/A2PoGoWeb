@@ -22,12 +22,14 @@ function formatAccount($account)
 		case 'email':
 			$newAccount['address'] = $account['address'];
 			$newAccount['icon'] = 'fa-envelope-o';
+			$newAccount['detail'] = $account['address'];
 			break;
 		case 'phone':
 			$address = explode('@', $account['address']);
 			$newAccount['number'] = $address[0];
 			$newAccount['carrier'] = $address[1];
 			$newAccount['icon'] = 'fa-mobile';
+			$newAccount['detail'] = $address[0];
 			break;
 		case 'discord':
 			$newAccount['webhook'] = $account['address'];
@@ -35,6 +37,7 @@ function formatAccount($account)
 			$newAccount['pokemon-user'] = $extra->pokemon_user;
 			$newAccount['raid-user'] = $extra->raid_user;
 			$newAccount['icon'] = 'fa-user-circle';
+			$newAccount['detail'] = $extra->channel;
 			break;
 		case 'slack':
 			$newAccount['webhook'] = $account['address'];
@@ -42,13 +45,14 @@ function formatAccount($account)
 			$newAccount['pokemon-user'] = $extra->pokemon_user;
 			$newAccount['raid-user'] = $extra->raid_user;
 			$newAccount['icon'] = 'fa-slack';
+			$newAccount['detail'] = $extra->channel;
 			break;
 	}
 
 	return $newAccount;
 }
 
-function getAccounts()
+function getAccounts($includeTemplate = true)
 {
 	$accounts = db_query("SELECT * FROM account WHERE user_id = ?", array($_SESSION['id']));
 	$returnAccounts = array();
@@ -56,6 +60,16 @@ function getAccounts()
 	foreach ($accounts as $account)
 	{
 		$returnAccounts[] = formatAccount($account);
+	}
+
+	if ($includeTemplate)
+	{
+		$returnAccounts[] = array(
+			'id' => -1,
+			'name' => '',
+			'icon' => '',
+			'detail' => ''
+		);
 	}
 
 	return $returnAccounts;
@@ -106,6 +120,7 @@ function formatMap($map)
 		}
 	}
 
+	$newMap["detail"] = formatDays($map['days']) . " / " . strtoupper(date("g:i a", strtotime($map["start_time"])) . ' - ' . date("g:i a", strtotime($map["end_time"])));
 
 	$icon = "fa-map-o";
 	if (in_array(date('N', strtotime(date('l'))), explode(',', $map['days'])))
@@ -124,7 +139,7 @@ function formatMap($map)
 	return $newMap;
 }
 
-function getMaps()
+function getMaps($includeTemplate = true)
 {
 	$maps = db_query("SELECT * FROM map WHERE user_id = ?", array($_SESSION['id']));
 	$returnMaps = array();
@@ -134,7 +149,45 @@ function getMaps()
 		$returnMaps[] = formatMap($map);
 	}
 
+	if ($includeTemplate)
+	{
+
+	}
+
 	return $returnMaps;
+}
+
+function formatDays($days)
+{
+	$names = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+	if (strpos($days, ",") === false)
+	{
+		$days .= ",";
+	}
+
+	$daysArr = explode(',', $days);
+
+	if (count($daysArr) == 7)
+	{
+		return "Every day";
+	}
+
+	if (count($daysArr) == 5 && in_array(1, $daysArr) && in_array(2, $daysArr) && in_array(3, $daysArr) && in_array(4, $daysArr) && in_array(5, $daysArr))
+	{
+		return "Weekdays";
+	}
+
+	if (count($daysArr) == 2 && in_array(6, $daysArr) && in_array(7, $daysArr))
+	{
+		return "Weekends";
+	}
+
+	$ret = array();
+	foreach($daysArr as $day)
+	{
+		$ret[] = $names[intval($day) - 1];
+	}
+	return implode(", ", $ret);
 }
 
 function unserialize_form($array)
