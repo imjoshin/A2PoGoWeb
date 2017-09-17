@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
 		uglify: {
 			options: {
-			
+
 			},
 			build: {
 				files: {

@@ -4,17 +4,15 @@ $().ready(function() {
 
 	$.fn.extend({
 		openNavElement: function() {
-			if ($(this).is('.btn-add')) {
-				$('.sub-nav-form').trigger("reset");
-				$('.formatter').keyup();
-				openAdd($(this));
-			} else if ($(this).is('.nav-tabs-item')) {
-				openTab($(this));
-			} else if ($(this).is('.nav-container-options-item')) {
-				$('.sub-nav-form').trigger("reset");
-				$('.formatter').keyup();
-				openItem($(this));
-			}
+			openView($(this));
+
+			// if ($(this).is('.btn-add')) {
+			// 	$('.sub-nav-form').trigger("reset");
+			// 	$('.formatter').keyup();
+			// 	openAdd($(this));
+			// } else if ($(this).is('.nav-container-options-item')) {
+			// 	openItem($(this));
+			// }
 
 			$('.sub-nav-form select').change();
 		},
@@ -64,17 +62,40 @@ $().ready(function() {
 	}
 
 	// Main header
-	function openTab(tab) {
-		if (!tab.hasClass('nav-tabs-item--active')) {
-			$('.nav-tabs-item--active').removeClass('nav-tabs-item--active');
-			$('.nav-tabs-container--active').removeClass('nav-tabs-container--active');
+	function openView(view) {
+		viewContainer = $('.nav-tabs-container[data-view="' + view.data('view') + '"]');
+		activeContainer = $('.nav-tabs-container--active');
+
+		if ($('.nav-tabs-container').index(viewContainer) < $('.nav-tabs-container').index(activeContainer)) {
+			viewContainer.removeClass("nav-tabs-container--left nav-tabs-container--active nav-tabs-container--right");
+			activeContainer.removeClass("nav-tabs-container--left nav-tabs-container--active nav-tabs-container--right");
+			activeContainer.addClass("nav-tabs-container--right");
+		} else if($('.nav-tabs-container').index(viewContainer) > $('.nav-tabs-container').index(activeContainer)) {
+			viewContainer.removeClass("nav-tabs-container--left nav-tabs-container--active nav-tabs-container--right");
+			activeContainer.removeClass("nav-tabs-container--left nav-tabs-container--active nav-tabs-container--right");
+			activeContainer.addClass("nav-tabs-container--left");
 		}
-		tab.addClass('nav-tabs-item--active');
-		$('.nav-tabs-container[data-tab="' + tab.data('tab') + '"]').addClass('nav-tabs-container--active');
-		console.log('.nav-tabs-container[data-tab="' + tab.data('tab') + '"]');
 
-		// reset subnav
+		if (view.is('.nav-tabs-item')) {
+			if (!view.hasClass('nav-tabs-item--active')) {
+				var tabIndex = $('.nav-tabs-item').index(view);
 
+				// weird hack... without this the active display wouldn't slide properly
+				setTimeout(function() {
+					$('.nav-tabs-track-slider').animate({
+						'left': ($('.nav').width() / $('.nav-tabs-item').length * tabIndex) + 'px'
+					}, 430);
+				}, 0);
+
+
+				$('.nav-tabs-item--active').removeClass('nav-tabs-item--active');
+				activeContainer.removeClass('nav-tabs-container--active');
+			}
+
+			view.addClass('nav-tabs-item--active');
+		}
+
+		viewContainer.addClass('nav-tabs-container--active');
 	}
 
 	// Map/Account item

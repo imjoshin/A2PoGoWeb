@@ -1,21 +1,24 @@
 <div class="nav">
 		<div id="welcome"></div>
 		<div class="container">
-			<div class="nav-tabs">
-				<div class="nav-tabs-item nav-tabs-item--active" data-tab="accounts">
+			<div class="row nav-tabs">
+				<div class="nav-tabs-item nav-tabs-item--active" data-view="accounts">
 					Accounts
 				</div>
-				<div class="nav-tabs-item" data-tab="maps">
+				<div class="nav-tabs-item" data-view="maps">
 					Maps
 				</div>
 			</div>
-			<div class="nav-scrollable">
-				<div class="nav-tabs-container nav-tabs-container--active" data-tab="accounts">
+			<div class="row nav-tabs-track">
+				<div class="nav-tabs-track-slider"></div>
+			</div>
+			<div class="row nav-content">
+				<div class="nav-tabs-container nav-tabs-container--active" data-view="accounts">
 					<?php
 						foreach ($accounts as $account)
 						{
 							echo "
-							<div class='row grid-x nav-tabs-container-item " . ($account['id'] < 0 ? 'nav-tabs-container-item-template' : '') . "' data-id='{$account['id']}' data-fields='" . json_encode($account) . "'>
+							<div class='row grid-x nav-tabs-container-item " . ($account['id'] < 0 ? 'nav-tabs-container-item-template' : '') . "' data-id='{$account['id']}' data-fields='" . json_encode($account) . "' data-view='account-form'>
 								<div class='columns small-1 nav-tabs-container-item-icon'>
 									<i class='fa {$account['icon']}' aria-hidden='true'></i>
 								</div>
@@ -36,12 +39,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="nav-tabs-container" data-tab="maps">
+				<div class="nav-tabs-container nav-tabs-container--right" data-view="maps">
 					<?php
 						foreach ($maps as $map)
 						{
 							echo "
-							<div class='row grid-x nav-tabs-container-item " . ($map['id'] < 0 ? 'nav-tabs-container-item-template' : '') . "' data-id='{$map['id']}' data-fields='" . json_encode($map) . "'>
+							<div class='row grid-x nav-tabs-container-item " . ($map['id'] < 0 ? 'nav-tabs-container-item-template' : '') . "' data-id='{$map['id']}' data-fields='" . json_encode($map) . "' data-view='map-form'>
 								<div class='columns small-1 nav-tabs-container-item-icon'>
 									<i class='fa {$map['icon']}' aria-hidden='true'></i>
 								</div>
@@ -61,6 +64,12 @@
 							<span class="btn btn-white btn-add" data-name="Add Map">Add Map</span>
 						</div>
 					</div>
+				</div>
+				<div class="nav-tabs-container nav-tabs-container--right" data-view="account-form">
+					<?php include 'views/account.php'?>
+				</div>
+				<div class="nav-tabs-container nav-tabs-container--right" data-view="map-form">
+					<?php include 'views/map.php'?>
 				</div>
 			</div>
 		</div>

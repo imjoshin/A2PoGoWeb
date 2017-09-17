@@ -5,7 +5,7 @@ $().ready(function() {
 	if (typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1) {
 		//$("#map").parent().siblings().remove();
 		//$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
-		$('.nav-tabs-container[data="map"] .nav-tabs-container-buttons').hide();
+		$('.nav-tabs-container[data-tab="maps"] .nav-tabs-container-buttons').hide();
 		$('.nav').css('width', '100%');
 		$('#login-wrapper-logo').hide();
 	}
@@ -17,7 +17,7 @@ $().ready(function() {
 	});
 
 	// handle nav events
-	$('.nav-container .btn-add, .nav-tabs-item, .nav-container-options-item').on('click', function() {
+	$('.nav-container .btn-add, .nav-tabs-item, .nav-tabs-container-item').on('click', function() {
 		$(this).openNavElement();
 	});
 
