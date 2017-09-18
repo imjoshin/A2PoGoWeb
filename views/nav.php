@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="row nav-tabs-track">
-				<div class="nav-tabs-track-slider"></div>
+				<div class="nav-tabs-track-slider" data-place='1'></div>
 			</div>
 			<div class="row nav-content">
 				<div class="nav-tabs-container nav-tabs-container--active" data-view="accounts">

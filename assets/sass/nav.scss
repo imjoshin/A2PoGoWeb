@@ -43,6 +43,15 @@ $nav-width: 400px;
 				left: 0px;
 				height: 100%;
 				background: $white;
+				transition: left .5s;
+
+				&[data-place='1'] {
+					left: 0px;
+				}
+
+				&[data-place='2'] {
+					left: 50%;
+				}
 			}
 		}
 

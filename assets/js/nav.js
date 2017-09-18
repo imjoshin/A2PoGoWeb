@@ -6,60 +6,17 @@ $().ready(function() {
 		openNavElement: function() {
 			openView($(this));
 
-			// if ($(this).is('.btn-add')) {
-			// 	$('.sub-nav-form').trigger("reset");
-			// 	$('.formatter').keyup();
-			// 	openAdd($(this));
-			// } else if ($(this).is('.nav-container-options-item')) {
-			// 	openItem($(this));
-			// }
+			if ($(this).is('.btn-add')) {
+				$('.sub-nav-form').trigger("reset");
+				$('.formatter').keyup();
+				openAdd($(this));
+			} else if ($(this).is('.nav-tabs-container-item')) {
+				openItem($(this));
+			}
 
 			$('.sub-nav-form select').change();
-		},
-		closeSubNav: function(callback) {
-			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
-			$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
-			callback();
 		}
 	});
-
-	function openAdd(button) {
-		// new map/account
-		window.new = true;
-		$('.sub-nav .non-editable-input').prop("disabled", false);
-		$(".sub-nav .hidden-edit-input").show();
-		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
-
-		if (!button.parent().hasClass('nav-container--active')) {
-			$('.nav-container--active .nav-container-options').slideUp(300);
-			$('.nav-container--active').removeClass('nav-container--active');
-			button.parent().find('.nav-container-options').slideDown(300);
-			button.parent().addClass('nav-container--active');
-		}
-
-		if (button.hasClass('bouncy')) {
-			button.removeClass('bouncy');
-		}
-
-		if (button.parents('.nav-container-maps').length) {
-			$('#map-accounts').empty();
-			// get accounts
-			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
-				var row = $(" \
-					<tr> \
-						<td><input type='checkbox' name=\"accounts[" + $(this).data('id') + "]\" /></td> \
-						<td>" + $(this).html() + "</td> \
-					</tr> \
-				");
-				$('#map-accounts').append(row);
-			});
-		}
-
-		$('.sub-nav-header').html(button.data('name'));
-		$('.sub-nav-form').hide();
-		$('.sub-nav-form-' + button.data('target')).show();
-		$('.sub-nav').animate({left: '0px'}, 300);
-	}
 
 	// Main header
 	function openView(view) {
@@ -79,15 +36,7 @@ $().ready(function() {
 		if (view.is('.nav-tabs-item')) {
 			if (!view.hasClass('nav-tabs-item--active')) {
 				var tabIndex = $('.nav-tabs-item').index(view);
-
-				// weird hack... without this the active display wouldn't slide properly
-				setTimeout(function() {
-					$('.nav-tabs-track-slider').animate({
-						'left': ($('.nav').width() / $('.nav-tabs-item').length * tabIndex) + 'px'
-					}, 430);
-				}, 0);
-
-
+				$('.nav-tabs-track-slider').attr('data-place', tabIndex + 1);
 				$('.nav-tabs-item--active').removeClass('nav-tabs-item--active');
 				activeContainer.removeClass('nav-tabs-container--active');
 			}
@@ -98,37 +47,45 @@ $().ready(function() {
 		viewContainer.addClass('nav-tabs-container--active');
 	}
 
+
+	function openAdd(button) {
+		// new map/account
+		window.new = true;
+
+		if (button.parents('[data-view="maps"]').length) {
+			$('#map-accounts').empty();
+			// get accounts
+			console.log("starting");
+			$('[data-view="accounts"] .nav-tabs-container-item').each(function(k, v) {
+				console.log(k + ", " + v);
+				var row = $(" \
+					<tr> \
+						<td><input type='checkbox' name=\"accounts[" + $(this).data('id') + "]\" /></td> \
+						<td>" + $(this).attr('data-fields')['name'] + "</td> \
+					</tr> \
+				");
+				$('#map-accounts').append(row);
+			});
+		}
+	}
+
 	// Map/Account item
 	function openItem(item) {
 		// not new map/account
-		$('.sub-nav .non-editable-input').prop("disabled", true);
-		$(".sub-nav .hidden-edit-input").hide();
-
-		if (item.hasClass('nav-container-options-item--active')) {
-			$('.sub-nav').animate({left: '-' + ($('.sub-nav').width() + 10) + 'px'}, 300);
-			item.removeClass('nav-container-options-item--active');
-			return;
-		}
-
-		$('.sub-nav').animate({left: '0px'}, 300);
-		$('.nav-container-options-item--active').removeClass('nav-container-options-item--active');
-		item.addClass('nav-container-options-item--active');
-
 		var fields = $.parseJSON(item.attr('data-fields'));
-
 		window.new = false;
 		window.id = fields['id'];
 
-		if (item.parents('.nav-container-accounts').length) {
+		if (item.parents('[data-view="accounts"]').length) {
 			$('.sub-nav #type').trigger('change');
 
 			$('.sub-nav-form').hide();
 			$('.sub-nav-form-account').show();
 
-		} else if (item.parents('.nav-container-maps').length) {
+		} else if (item.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
 			// get accounts
-			$('.nav-container-accounts .nav-container-options-item').each(function(k, v) {
+			$('.nav-container-accounts .nav-tabs-container-item').each(function(k, v) {
 				var row = $(" \
 					<tr> \
 						<td><input type='checkbox' id=\"accounts[" + $(this).data('id') + "]\" name=\"accounts[" + $(this).data('id') + "]\" /></td> \
@@ -147,13 +104,11 @@ $().ready(function() {
 		// Set fields on form
 		$.each(fields, function(input, value) {
 			input = input.replace('[', '\\[').replace(']', '\\]');
-			if ($('.sub-nav #' + input).attr("type") == "checkbox") {
-				$('.sub-nav #' + input).prop('checked', value == "on");
+			if ($('#' + input).attr("type") == "checkbox") {
+				$('#' + input).prop('checked', value == "on");
 			} else {
-				$('.sub-nav #' + input).val(value);
+				$('#' + input).val(value);
 			}
 		});
-
-		$('.sub-nav-header').text('Editing "' + fields['name'] + '"');
 	}
 });

@@ -144,11 +144,6 @@ $().ready(function() {
 						account.html("<i class='fa " + data.output['fields']['icon'] + "' aria-hidden='true'></i>" + data.output['fields']['name']);
 						account.attr('data-fields', JSON.stringify(data.output['fields']));
 					}
-
-					$(document).closeSubNav(function() {
-						$('.sub-nav-form-address-verification .btn').show();
-						$('#verification').hide();
-					});
 				} else {
 					$('.sub-nav .message').addClass('message-error');
 					$('.sub-nav .message').html(data.output['message']);
