@@ -1,20 +1,13 @@
 $().ready(function() {
-
-	var nav = $('.nav')[0];
-
 	$.fn.extend({
 		openNavElement: function() {
-			openView($(this));
-
 			if ($(this).is('.btn-add')) {
-				$('.sub-nav-form').trigger("reset");
-				$('.formatter').keyup();
 				openAdd($(this));
 			} else if ($(this).is('.nav-tabs-container-item')) {
 				openItem($(this));
 			}
 
-			$('.sub-nav-form select').change();
+			openView($(this));
 		}
 	});
 
@@ -51,17 +44,17 @@ $().ready(function() {
 	function openAdd(button) {
 		// new map/account
 		window.new = true;
+		$('.nav-form').trigger("reset");
 
 		if (button.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
 			// get accounts
-			console.log("starting");
-			$('[data-view="accounts"] .nav-tabs-container-item').each(function(k, v) {
-				console.log(k + ", " + v);
+			$('[data-view="accounts"] .nav-tabs-container-item:not(.nav-tabs-container-item-template)').each(function(k, v) {
+				var fields = $.parseJSON($(this).attr('data-fields'));
 				var row = $(" \
 					<tr> \
-						<td><input type='checkbox' name=\"accounts[" + $(this).data('id') + "]\" /></td> \
-						<td>" + $(this).attr('data-fields')['name'] + "</td> \
+						<td><input type='checkbox' id=\"accounts[" + fields['id'] + "]\" name=\"accounts[" + fields['id'] + "]\" /></td> \
+						<td>" + fields['name'] + "</td> \
 					</tr> \
 				");
 				$('#map-accounts').append(row);
@@ -75,30 +68,27 @@ $().ready(function() {
 		var fields = $.parseJSON(item.attr('data-fields'));
 		window.new = false;
 		window.id = fields['id'];
+		$('.nav-form').trigger("reset");
 
 		if (item.parents('[data-view="accounts"]').length) {
-			$('.sub-nav #type').trigger('change');
-
-			$('.sub-nav-form').hide();
-			$('.sub-nav-form-account').show();
+			$('select').trigger("change");
 
 		} else if (item.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
+
 			// get accounts
-			$('.nav-container-accounts .nav-tabs-container-item').each(function(k, v) {
+			$('[data-view="accounts"] .nav-tabs-container-item:not(.nav-tabs-container-item-template)').each(function(k, v) {
+				var fields = $.parseJSON($(this).attr('data-fields'));
 				var row = $(" \
 					<tr> \
-						<td><input type='checkbox' id=\"accounts[" + $(this).data('id') + "]\" name=\"accounts[" + $(this).data('id') + "]\" /></td> \
-						<td>" + $(this).html() + "</td> \
+						<td><input type='checkbox' id=\"accounts[" + fields['id'] + "]\" name=\"accounts[" + fields['id'] + "]\" /></td> \
+						<td>" + fields['name'] + "</td> \
 					</tr> \
 				");
 				$('#map-accounts').append(row);
 			});
 
 			updateMonForm(fields['pokemon']);
-
-			$('.sub-nav-form').hide();
-			$('.sub-nav-form-map').show();
 		}
 
 		// Set fields on form
@@ -106,9 +96,12 @@ $().ready(function() {
 			input = input.replace('[', '\\[').replace(']', '\\]');
 			if ($('#' + input).attr("type") == "checkbox") {
 				$('#' + input).prop('checked', value == "on");
+				console.log("Set " + '#' + input);
 			} else {
 				$('#' + input).val(value);
 			}
 		});
+
+		$('.formatter').keyup();
 	}
 });

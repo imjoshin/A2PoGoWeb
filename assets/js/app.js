@@ -16,8 +16,7 @@ $().ready(function() {
 		}
 	});
 
-	// handle nav events
-	$('.nav-container .btn-add, .nav-tabs-item, .nav-tabs-container-item').on('click', function() {
+	$('.nav-tabs-item, .nav-tabs-container-item, .btn[data-view]').on('click', function() {
 		$(this).openNavElement();
 	});
 
@@ -27,28 +26,27 @@ $().ready(function() {
 		}
 	});
 
-	$('.sub-nav-form-account #type').on('change', function() {
+	$('#type').on('change', function() {
 		if ($(this).val() == "phone" || $(this).val() == "email") {
-			$('.sub-nav-form-address').show();
-			$('.sub-nav-form-webhook').hide();
+			$('[data-type="webhook"]').hide();
 
 			if($(this).val() == "phone") {
-				$('.sub-nav-form-address-phone').show();
-				$('.sub-nav-form-address-email').hide();
+				$('[data-type="address-phone"]').show();
+				$('[data-type="address-email"]').hide();
 			} else {
-				$('.sub-nav-form-address-phone').hide();
-				$('.sub-nav-form-address-email').show();
+				$('[data-type="address-phone"]').hide();
+				$('[data-type="address-email"]').show();
 			}
 		} else {
-			$('.sub-nav-form-address').hide();
-			$('.sub-nav-form-webhook').show();
+			$('[data-type="address-phone"]').hide();
+			$('[data-type="address-email"]').hide();
+			$('[data-type="webhook"]').show();
 		}
 
 		$('.sub-nav .message').empty();
 	});
 
 	$('.formatter').on('keyup', function() {
-		console.log("Press");
 		var format = $(this).val();
 		var variables = {
 			'%NAME%': 'Pikachu',
@@ -63,11 +61,8 @@ $().ready(function() {
 		}
 
 		$.each(variables, function (key, value) {
-			console.log("Replacing " + key + " with " + value);
 			format = format.replace(key, value);
 		});
-
-		console.log('Setting to #' + $(this).attr('id') + '-preview : ' + format);
 
 		$('#' + $(this).attr('id') + '-preview').text(format.length ? format : '');
 	});

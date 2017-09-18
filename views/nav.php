@@ -35,7 +35,7 @@
 					?>
 					<div class='row grid-x nav-tabs-container-buttons'>
 						<div class='columns small-12'>
-							<span class="btn btn-white btn-add" data-name="Add Account">Add Account</span>
+							<span class="btn btn-white btn-add" data-name="Add Account" data-view="account-form">Add Account</span>
 						</div>
 					</div>
 				</div>
@@ -61,14 +61,14 @@
 					?>
 					<div class='row grid-x nav-tabs-container-buttons'>
 						<div class='columns small-12'>
-							<span class="btn btn-white btn-add" data-name="Add Map">Add Map</span>
+							<span class="btn btn-white btn-add" data-name="Add Map" data-view="map-form">Add Map</span>
 						</div>
 					</div>
 				</div>
-				<div class="nav-tabs-container nav-tabs-container--right" data-view="account-form">
+				<div class="nav-tabs-container nav-tabs-container--right nav-form" data-view="account-form">
 					<?php include 'views/account.php'?>
 				</div>
-				<div class="nav-tabs-container nav-tabs-container--right" data-view="map-form">
+				<div class="nav-tabs-container nav-tabs-container--right nav-form" data-view="map-form">
 					<?php include 'views/map.php'?>
 				</div>
 			</div>

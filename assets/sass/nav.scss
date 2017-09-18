@@ -1,5 +1,10 @@
 $nav-width: 400px;
 
+[data-type="address-email"],
+[data-type="webhook"] {
+	display: none;
+}
+
 .nav {
 	position: absolute;
 	z-index: 10;
@@ -81,6 +86,7 @@ $nav-width: 400px;
 			transition: left .5s;
 			overflow-y: scroll;
 			overflow-x: hidden;
+			padding: 0 10px;
 			padding-bottom: 50px;
 
 			&--left {
