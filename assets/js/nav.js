@@ -60,6 +60,11 @@ $().ready(function() {
 				$('#map-accounts').append(row);
 			});
 		}
+
+		$('.formatter').keyup();
+		$('.nav-form select').change();
+		$('.non-editable-input').prop('disabled', false);
+		$('.hidden-edit-input').show();
 	}
 
 	// Map/Account item
@@ -71,7 +76,7 @@ $().ready(function() {
 		$('.nav-form').trigger("reset");
 
 		if (item.parents('[data-view="accounts"]').length) {
-			$('select').trigger("change");
+
 
 		} else if (item.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
@@ -96,12 +101,14 @@ $().ready(function() {
 			input = input.replace('[', '\\[').replace(']', '\\]');
 			if ($('#' + input).attr("type") == "checkbox") {
 				$('#' + input).prop('checked', value == "on");
-				console.log("Set " + '#' + input);
 			} else {
 				$('#' + input).val(value);
 			}
 		});
 
 		$('.formatter').keyup();
+		$('.nav-form select').change();
+		$('.non-editable-input').prop('disabled', true);
+		$('.hidden-edit-input').hide();
 	}
 });

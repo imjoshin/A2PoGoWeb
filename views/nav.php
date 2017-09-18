@@ -73,16 +73,5 @@
 				</div>
 			</div>
 		</div>
-	<!--
-	<div class="sub-nav">
-		<h2 class="sub-nav-header">Add Account</h2>
-		<form class="sub-nav-form sub-nav-form-account">
-			<?php //include 'views/account.php'; ?>
-		</form>
-		<form class="sub-nav-form sub-nav-form-map">
-			<?php //include 'views/map.php'; ?>
-		</form>
-		<div class='message'></div>
-	</div>
-	-->
+	</div>>
 </div>

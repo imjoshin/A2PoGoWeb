@@ -29,6 +29,7 @@ $().ready(function() {
 	$('#type').on('change', function() {
 		if ($(this).val() == "phone" || $(this).val() == "email") {
 			$('[data-type="webhook"]').hide();
+			$('[data-type="address"]').show();
 
 			if($(this).val() == "phone") {
 				$('[data-type="address-phone"]').show();
@@ -40,6 +41,7 @@ $().ready(function() {
 		} else {
 			$('[data-type="address-phone"]').hide();
 			$('[data-type="address-email"]').hide();
+			$('[data-type="address"]').hide();
 			$('[data-type="webhook"]').show();
 		}
 

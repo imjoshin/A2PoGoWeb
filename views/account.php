@@ -58,21 +58,26 @@
 				<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%"><br/>
 				<span id="pokemon-user-preview"></span>
 			</div>
+			<div class="columns small-6 form-field">
+				<h3>Pokemon Format</h3>
+				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
+				<span id="pokemon-format-preview"></span>
+			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>Raid User</h3>
 				<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)"><br/>
 				<span id="raid-user-preview"></span>
 			</div>
 			<div class="columns small-6 form-field">
-				<h3>Pokemon Format</h3>
-				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
-				<span id="pokemon-format-preview"></span>
-			</div>
-			<div class="columns small-6 form-field">
 				<h3>Raid Format</h3>
 				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%."><br/>
 				<span id="raid-format-preview"></span>
 			</div>
+			<div class="columns small-6 form-field nav-form-address-verification hidden-edit-input" data-type="address">
+				<h3>Verification Code</h3>
+				<a class="btn">Send Code</a>
+				<input type="text" id="verification" name="verification" style="display: none;">
+			</span>
 		</div>
 	</form>
 </div>
