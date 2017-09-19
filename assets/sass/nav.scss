@@ -1,10 +1,5 @@
 $nav-width: 400px;
 
-[data-type="address-email"],
-[data-type="webhook"] {
-	display: none;
-}
-
 .nav {
 	position: absolute;
 	z-index: 10;
@@ -42,6 +37,10 @@ $nav-width: 400px;
 
 		td {
 			color: $white;
+		}
+
+		table {
+			margin: 0 auto;
 		}
 	}
 
@@ -161,58 +160,6 @@ $nav-width: 400px;
 			& .message {
 				padding-top: 20px;
 				text-align: center;
-			}
-		}
-	}
-
-	.sub-nav {
-		width: $nav-width + 50px;
-		z-index: 11;
-		position: relative;
-		left: -$nav-width - 55px;
-		background-color: $blue;
-		text-align: center;
-
-		&-header {
-			font-size: 24px;
-			margin-top: 30px;
-			display: block
-		}
-
-		&-form {
-			padding-bottom: 30px;
-
-			h3 {
-				font-weight: 500;
-				font-size: 17px;
-				margin-top: 24px;
-				margin-bottom: 10px;
-			}
-
-			h4 {
-				font-weight: 500;
-				font-size: 16px;
-				margin-top: 18px;
-				margin-bottom: 7px;
-			}
-
-			input[type="text"],
-			select {
-				width: 70%;
-			}
-
-			input[type="time"] {
-				width: 35%;
-				text-align: center;
-				margin: 0 5px;
-				font-family: inherit;
-
-
-			}
-
-			table {
-				margin: 0 auto;
-				color: $white;
 			}
 		}
 	}
