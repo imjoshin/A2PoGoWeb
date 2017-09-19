@@ -150,6 +150,31 @@ body {
 	font-size: 13px;
 }
 
+.popover {
+	background: $white;
+	border: 2px solid $blue;
+	border-radius: 5px;
+	color: $dark-blue;
+	position: absolute;
+	max-width: 300px;
+	min-width: 60px;
+	min-height: 40px;
+	word-wrap: break-word;
+    padding: 10px;
+	font-size: 14px;
+	z-index: 15;
+}
+
+.info-icon {
+	display: inline;
+	font-size: 15px;
+	padding-left: 5px;
+	cursor: pointer;
+
+	&-content {
+		display: none;
+	}
+}
 .disabled {
 	opacity: .3;
 }
@@ -186,6 +211,12 @@ select {
 
 input[type='time'] {
 	width: 47%;
+
+	&::-webkit-inner-spin-button,
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 }
 
 .form-field {

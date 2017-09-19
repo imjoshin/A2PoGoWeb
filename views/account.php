@@ -54,22 +54,72 @@
 				<input type="text" id="channel" name="channel">
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
-				<h3>Pokemon User</h3>
+				<h3>
+					Pokemon User
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%ENDTIME% - Despawn Time
+						</div>
+					</div>
+				</h3>
 				<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%"><br/>
 				<span id="pokemon-user-preview"></span>
 			</div>
 			<div class="columns small-6 form-field">
-				<h3>Pokemon Format</h3>
+				<h3>
+					Pokemon Format
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%ENDTIME% - Despawn Time
+						</div>
+					</div>
+				</h3>
 				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
 				<span id="pokemon-format-preview"></span>
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
-				<h3>Raid User</h3>
+				<h3>
+					Raid User
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%GYMNAME% - Gym Name<br/>
+							%STARTTIME% - Start Time<br/>
+							%ENDTIME% - End Time<br/>
+							%RAIDLEVEL% - Raid Level
+						</div>
+					</div>
+				</h3>
 				<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)"><br/>
 				<span id="raid-user-preview"></span>
 			</div>
 			<div class="columns small-6 form-field">
-				<h3>Raid Format</h3>
+				<h3>
+					Raid Format
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%GYMNAME% - Gym Name<br/>
+							%STARTTIME% - Start Time<br/>
+							%ENDTIME% - End Time<br/>
+							%RAIDLEVEL% - Raid Level
+						</div>
+					</div>
+				</h3>
 				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%."><br/>
 				<span id="raid-format-preview"></span>
 			</div>
@@ -77,7 +127,7 @@
 				<h3>Verification Code</h3>
 				<a class="btn">Send Code</a>
 				<input type="text" id="verification" name="verification" style="display: none;">
-			</span>
+			</div>
 		</div>
 	</form>
 </div>
