@@ -8,6 +8,8 @@ $().ready(function() {
 		$('.nav-tabs-container[data-tab="maps"] .nav-tabs-container-buttons').hide();
 		$('.nav').css('width', '100%');
 		$('#login-wrapper-logo').hide();
+		$('#welcome').css('height', '75px');
+		$('.nav-tabs-item').css('height', '20px');
 	}
 
 	$('.modal-wrapper:not(#login-wrapper)').on('click', function(e) {
