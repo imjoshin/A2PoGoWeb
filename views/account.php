@@ -1,5 +1,5 @@
 <div class="container">
-	<form class='nav-form'>
+	<form class='nav-form nav-form-account'>
 		<div class="row grid-x">
 			<div class="columns small-6 form-field">
 				<h3>Name</h3>
@@ -13,6 +13,8 @@
 					<option value='slack'>Slack</option>
 					<option value='discord'>Discord</option>
 				</select>
+			</div>
+			<div class="columns small-3 form-field" data-type="address-email">
 			</div>
 			<div class="columns small-6 form-field" data-type="address-email">
 				<h3>Address</h3>
@@ -67,7 +69,6 @@
 					</div>
 				</h3>
 				<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%"><br/>
-				<span id="pokemon-user-preview"></span>
 			</div>
 			<div class="columns small-6 form-field">
 				<h3>
@@ -83,7 +84,6 @@
 					</div>
 				</h3>
 				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
-				<span id="pokemon-format-preview"></span>
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>
@@ -102,7 +102,6 @@
 					</div>
 				</h3>
 				<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)"><br/>
-				<span id="raid-user-preview"></span>
 			</div>
 			<div class="columns small-6 form-field">
 				<h3>
@@ -120,8 +119,9 @@
 						</div>
 					</div>
 				</h3>
-				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%."><br/>
-				<span id="raid-format-preview"></span>
+				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%." notab><br/>
+			</div>
+			<div class="columns small-3 form-field nav-form-address-verification hidden-edit-input" data-type="address">
 			</div>
 			<div class="columns small-6 form-field nav-form-address-verification hidden-edit-input" data-type="address">
 				<h3>Verification Code</h3>
@@ -133,6 +133,6 @@
 </div>
 <div class='row grid-x nav-tabs-container-buttons'>
 	<div class='columns small-12'>
-		<a class="btn btn-save">Save</a>
+		<a class="btn btn-save" data-target='account-form'>Save</a>
 	</div>
 </div>

@@ -18,13 +18,21 @@ $().ready(function() {
 		}
 	});
 
-	$('.nav-tabs-item, .nav-tabs-container-item, .btn[data-view]').on('click', function() {
+	$(document).on('click', '.nav-tabs-item:not(.disabled), .nav-tabs-container-item:not(.disabled), .btn[data-view]:not(.disabled)', function() {
 		$(this).openNavElement();
 	});
 
-	$('.sub-nav-form input').on('keypress', function (e) {
+	$('.nav-form input').on('keypress', function (e) {
 		if (e.which == 13) {
-			$(this).parents('form').find('.btn-save').click();
+			var view = $(this).parents('.nav-tabs-container').data('view');
+			$('.btn-save[data-target=' + view + ']').click();
+		}
+	});
+
+	// disable tab
+	$(':not(input), input[notab]').on('keydown', function(e) {
+		if (e.keyCode == 9) {
+			e.preventDefault();
 		}
 	});
 
@@ -132,9 +140,11 @@ $().ready(function() {
 	});
 
 	// address verification
-	$('.sub-nav-form-address-verification .btn').on('click', function() {
+	$(document).on('click', '.nav-form-address-verification .btn:not(.disabled)', function() {
 		button = $(this);
-		form = $('.sub-nav-form-account');
+		button.addClass('disabled');
+		form = $('.nav-form-account');
+		message = form.parent().parent().find('.message');
 
 		$.ajax({
 			type: "POST",
@@ -145,8 +155,9 @@ $().ready(function() {
 				form: form.serialize()
 			},
 			success: function(data) {
+				button.removeClass('disabled');
 				if (data.success) {
-					$('.sub-nav .message').empty();
+					$('.nav .message').empty();
 					button.hide();
 					$('#verification').show();
 				} else {
@@ -155,22 +166,29 @@ $().ready(function() {
 						$('#verification').show();
 					}
 
-					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output['message']);
+					message.addClass('message-error');
+					message.html(data.output['message']);
 				}
 			}
 		});
 	});
 
-	$('.sub-nav-form-account .btn-save').on('click', function() {
-		form = $('.sub-nav-form-account');
+	$('[data-view="account-form"] .btn-save').on('click', function() {
+		form = $('.nav-form-account');
+		message = form.parent().parent().find('.message');
 
-		$('.sub-nav .non-editable-input').prop('disabled', false);
+		if (!window.new) {
+			$('.non-editable-input').prop('disabled', false);
+		}
+
 		form.append("<input type='hidden' class='temp' name='new' value='" + (window.new ? 1 : 0) + "'>");
 		form.append("<input type='hidden' class='temp' name='id' value='" + window.id + "'>");
 		serialized = form.serialize();
 		$("input.temp").remove();
-		$('.sub-nav .non-editable-input').prop('disabled', true);
+
+		if (!window.new) {
+			$('.non-editable-input').prop('disabled', true);
+		}
 
 		$.ajax({
 			type: "POST",
@@ -182,37 +200,39 @@ $().ready(function() {
 			},
 			success: function(data) {
 				if (data.success) {
-					$('.sub-nav .message').empty();
+					var account;
 
 					if (data.output['new']) {
 						// previously no accounts
 						if (!$('.nav-container-accounts .nav-container-options-item').length) {
-							$('.nav-container-accounts').removeClass('nav-container--empty');
 							$('.nav-container-maps').removeClass('disabled');
-							$('.nav-container-maps .btn-add').fadeIn(500);
 						}
 
-						var account = $("<div class='nav-container-options-item'></div>");
-						account.html("<i class='fa " + data.output['fields']['icon'] + "' aria-hidden='true'></i>" + data.output['fields']['name']);
-						account.data('fields', data.output['fields']);
-						account.hide();
-						$('.nav-container-accounts .nav-container-options').append(account);
-						account.slideDown(500);
+						account = $('[data-view="accounts"] .nav-tabs-container-item-template').clone();
+						account.find('.fa').addClass(data.output['fields']['icon']);
+						account.attr('data-id', data.output['fields']['id']);
+						$('[data-view="accounts"] .nav-tabs-container-buttons').before(account);
+						account.css('display', 'flex');
 					} else {
-						var account = $(".nav-container-options-item--active");
-						account.html("<i class='fa " + data.output['fields']['icon'] + "' aria-hidden='true'></i>" + data.output['fields']['name']);
-						account.attr('data-fields', JSON.stringify(data.output['fields']));
+						account = $('[data-view="accounts"] .nav-tabs-container-item[data-id=' + data.output['fields']['id'] + ']');
 					}
+
+					account.attr('data-fields', JSON.stringify(data.output['fields']));
+					account.find('.nav-tabs-container-item-info-name').text(data.output['fields']['name']);
+					account.find('.nav-tabs-container-item-info-details').text(data.output['fields']['detail']);
+					account.animate({'opacity': 1}, 800);
+					$('[data-view="accounts"]').openNavElement();
 				} else {
-					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output['message']);
+					message.addClass('message-error');
+					message.html(data.output['message']);
 				}
 			}
 		});
 	});
 
-	$('.sub-nav-form-map .btn-save').on('click', function() {
-		form = $('.sub-nav-form-map');
+	$('[data-view="map-form"] .btn-save').on('click', function() {
+		form = $('.nav-form-map');
+		message = form.parent().parent().find('.message');
 
 		form.append("<input type='hidden' class='temp' name='new' value='" + (window.new ? 1 : 0) + "'>");
 		form.append("<input type='hidden' class='temp' name='id' value='" + window.id + "'>");
@@ -229,7 +249,6 @@ $().ready(function() {
 			},
 			success: function(data) {
 				if (data.success) {
-					$('.sub-nav .message').empty();
 					/*
 					// previously no maps
 					if (!$('.nav-container-maps .nav-container-options-item').length) {
@@ -245,8 +264,8 @@ $().ready(function() {
 					$(document).closeSubNav();
 					*/
 				} else {
-					$('.sub-nav .message').addClass('message-error');
-					$('.sub-nav .message').html(data.output['message']);
+					message.addClass('message-error');
+					message.html(data.output['message']);
 				}
 			}
 		});

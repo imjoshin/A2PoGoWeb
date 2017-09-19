@@ -6,7 +6,7 @@ class Account
 	{
 		$address = trim($form['address']);
 
-		if ($form['type'] === "Phone")
+		if ($form['type'] === "phone")
 		{
 			$number = str_replace(array('(', ')', ' ', '-',), '', $form['number']);
 			if (!is_numeric($number) || strlen($number) != 10)
@@ -106,7 +106,7 @@ class Account
 		{
 			if ($form['new'])
 			{
-				if ($form['type'] === 'Phone')
+				if ($form['type'] === 'phone')
 				{
 					$address = trim($form['number'] . '@' . $form['carrier']);
 				}
@@ -114,7 +114,8 @@ class Account
 					$address = trim($form['address']);
 				}
 
-				$codecheck = db_query("SELECT address FROM verification WHERE address = ? AND code = ?", array($address, $form['verification']));
+				$codecheck = db_query("SELECT * FROM verification WHERE address = ? AND code = ? AND user_id = ?", array($address, $form['verification'], $_SESSION['id']));
+
 				if (!count($codecheck))
 				{
 					return array('success'=>false, 'output'=>array(

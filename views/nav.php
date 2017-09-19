@@ -5,7 +5,7 @@
 			<div class="nav-tabs-item nav-tabs-item--active" data-view="accounts">
 				Accounts
 			</div>
-			<div class="nav-tabs-item" data-view="maps">
+			<div class="nav-tabs-item <?php echo (count($accounts) <= 1 ? 'disabled' : ''); ?>" data-view="maps">
 				Maps
 			</div>
 		</div>
@@ -65,11 +65,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="nav-tabs-container nav-tabs-container--right nav-form" data-view="account-form">
+			<div class="nav-tabs-container nav-tabs-container--right" data-view="account-form">
 				<?php include 'views/account.php'?>
+				<div class='columns small-12 message'></div>
 			</div>
-			<div class="nav-tabs-container nav-tabs-container--right nav-form" data-view="map-form">
+			<div class="nav-tabs-container nav-tabs-container--right" data-view="map-form">
 				<?php include 'views/map.php'?>
+				<div class='columns small-12 message'></div>
 			</div>
 		</div>
 	</div>

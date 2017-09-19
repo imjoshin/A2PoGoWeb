@@ -14,6 +14,7 @@ $().ready(function() {
 	// Main header
 	function openView(view) {
 		viewContainer = $('.nav-tabs-container[data-view="' + view.data('view') + '"]');
+		viewContainer.find('.message').empty();
 		activeContainer = $('.nav-tabs-container--active');
 
 		if ($('.nav-tabs-container').index(viewContainer) < $('.nav-tabs-container').index(activeContainer)) {
@@ -46,7 +47,10 @@ $().ready(function() {
 		window.new = true;
 		$('.nav-form').trigger("reset");
 
-		if (button.parents('[data-view="maps"]').length) {
+		if (button.parents('[data-view="accounts"]').length) {
+			$('.nav-form-address-verification .btn').show();
+			$('#verification').hide();
+		} else if (button.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
 			// get accounts
 			$('[data-view="accounts"] .nav-tabs-container-item:not(.nav-tabs-container-item-template)').each(function(k, v) {
@@ -76,8 +80,8 @@ $().ready(function() {
 		$('.nav-form').trigger("reset");
 
 		if (item.parents('[data-view="accounts"]').length) {
-
-
+			$('.nav-form-address-verification .btn').show();
+			$('#verification').hide();
 		} else if (item.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
 

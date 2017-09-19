@@ -1,9 +1,9 @@
 <div class="container">
-	<form class='nav-form'>
+	<form class='nav-form nav-form-map'>
 		<div class="row grid-x">
 			<div class="columns small-6 small-offset-3 form-field">
 				<h3>Name</h3>
-				<input type="text" id="name" name="name">
+				<input type="text" id="name" name="name" notab>
 			</div>
 		</div>
 		<div class="row grid-x">
@@ -78,7 +78,7 @@
 						<td>Level 4</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="raids[5]" name="raids[5]" /></td>
+						<td><input type="checkbox" id="raids[5]" name="raids[5]" notab/></td>
 						<td>Level 5</td>
 					</tr>
 				</table>
@@ -89,6 +89,6 @@
 </div>
 <div class='row grid-x nav-tabs-container-buttons'>
 	<div class='columns small-12'>
-		<a class="btn btn-save">Save</a>
+		<a class="btn btn-save" data-target='map-form'>Save</a>
 	</div>
 </div>

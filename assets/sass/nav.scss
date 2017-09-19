@@ -72,7 +72,6 @@ $nav-width: 400px;
 		}
 
 		&-item {
-			cursor: pointer;
 			height: 50px;
 			flex: 1;
 			display: flex;
@@ -80,12 +79,12 @@ $nav-width: 400px;
 			justify-content: center;
 			transition: all .3s;
 
-			&:hover {
-				color: mix($yellow, $white, 35%);
-			}
+			&:not(.disabled) {
+				cursor: pointer;
 
-			&-template {
-				display: none;
+				&:hover {
+					color: mix($yellow, $white, 35%);
+				}
 			}
 		}
 
@@ -147,10 +146,20 @@ $nav-width: 400px;
 						opacity: .5;
 					}
 				}
+
+				&-template {
+					opacity: 0;
+					display: none;
+				}
 			}
 
 			&-buttons {
 				margin-top: 40px;
+				text-align: center;
+			}
+
+			& .message {
+				padding-top: 20px;
 				text-align: center;
 			}
 		}
