@@ -29,7 +29,7 @@ function formatAccount($account)
 			$newAccount['number'] = $address[0];
 			$newAccount['carrier'] = $address[1];
 			$newAccount['icon'] = 'fa-mobile';
-			$newAccount['detail'] = $address[0];
+			$newAccount['detail'] = "(" . substr($address[0], 0, 3) . ") " . substr($address[0], 3, 3) . "-" . substr($address[0], 6);
 			break;
 		case 'discord':
 			$newAccount['webhook'] = $account['address'];
