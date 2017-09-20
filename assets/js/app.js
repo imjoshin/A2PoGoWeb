@@ -5,7 +5,7 @@ $().ready(function() {
 	if (typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1) {
 		//$("#map").parent().siblings().remove();
 		//$("<div class='mobile-overlay'>").prependTo($("#map").parent().parent());
-		$('.nav-tabs-container[data-tab="maps"] .nav-tabs-container-buttons').hide();
+		$('.nav-tabs-container[data-view="maps"] .nav-tabs-container-buttons').hide();
 		$('.nav').css('width', '100%');
 		$('#login-wrapper-logo').hide();
 		$('#welcome').css('height', '75px');
