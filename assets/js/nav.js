@@ -52,6 +52,7 @@ $().ready(function() {
 			$('#verification').hide();
 		} else if (button.parents('[data-view="maps"]').length) {
 			$('#map-accounts').empty();
+			updateMonForm('-1');
 			// get accounts
 			$('[data-view="accounts"] .nav-tabs-container-item:not(.nav-tabs-container-item-template)').each(function(k, v) {
 				var fields = $.parseJSON($(this).attr('data-fields'));
@@ -103,10 +104,10 @@ $().ready(function() {
 		// Set fields on form
 		$.each(fields, function(input, value) {
 			input = input.replace('[', '\\[').replace(']', '\\]');
-			if ($('#' + input).attr("type") == "checkbox") {
-				$('#' + input).prop('checked', value == "on");
+			if ($('[id = ' + input + ']').attr("type") == "checkbox") {
+				$('[id = ' + input + ']').prop('checked', value == "on");
 			} else {
-				$('#' + input).val(value);
+				$('[id = ' + input + ']').val(value);
 			}
 		});
 

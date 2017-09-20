@@ -1,9 +1,13 @@
 function updateMonForm(pokemon) {
 	pokemon = pokemon || "";
-
+	
 	if (pokemon.length) {
 		$('.mon-select-modal-images-item--active').removeClass('mon-select-modal-images-item--active');
 		$.each(pokemon.split(','), function(k, id) {
+			if (id.length == 0) {
+				return;
+			}
+
 			$(".mon-select-modal-images-item[data-id=" + id + "]").addClass('mon-select-modal-images-item--active');
 		});
 	} else {
@@ -22,7 +26,7 @@ function serializeArray(array) {
 	var ret = "";
 	for (var k in array) {
 		ret += k + "=" + array[k] + "&";
-	};
+	}
 	return ret.slice(0, -1);
 }
 

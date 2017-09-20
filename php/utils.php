@@ -120,7 +120,14 @@ function formatMap($map)
 		}
 	}
 
-	$newMap["detail"] = formatDays($map['days']) . " / " . strtoupper(date("g:i a", strtotime($map["start_time"])) . ' - ' . date("g:i a", strtotime($map["end_time"])));
+	if (strlen($map['days']) > 0 && preg_match('/\\d/', $map['days']))
+	{
+		$newMap["detail"] = formatDays($map['days']) . " / " . strtoupper(date("g:i a", strtotime($map["start_time"])) . ' - ' . date("g:i a", strtotime($map["end_time"])));
+	}
+	else
+	{
+		$newMap["detail"] = "No active days";
+	}
 
 	$icon = "fa-map-o";
 	if (in_array(date('N', strtotime(date('l'))), explode(',', $map['days'])))
@@ -151,7 +158,12 @@ function getMaps($includeTemplate = true)
 
 	if ($includeTemplate)
 	{
-
+		$returnMaps[] = array(
+			'id' => -1,
+			'name' => '',
+			'icon' => '',
+			'detail' => ''
+		);
 	}
 
 	return $returnMaps;
@@ -169,7 +181,7 @@ function formatDays($days)
 
 	if (count($daysArr) == 7)
 	{
-		return "Every day";
+		return "Daily";
 	}
 
 	if (count($daysArr) == 5 && in_array(1, $daysArr) && in_array(2, $daysArr) && in_array(3, $daysArr) && in_array(4, $daysArr) && in_array(5, $daysArr))

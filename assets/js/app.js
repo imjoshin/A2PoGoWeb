@@ -220,8 +220,11 @@ $().ready(function() {
 					account.attr('data-fields', JSON.stringify(data.output['fields']));
 					account.find('.nav-tabs-container-item-info-name').text(data.output['fields']['name']);
 					account.find('.nav-tabs-container-item-info-details').text(data.output['fields']['detail']);
-					account.animate({'opacity': 1}, 800);
 					$('[data-view="accounts"]').openNavElement();
+
+					setTimeout(function() {
+						account.animate({'opacity': 1}, 800);
+					}, 300);
 				} else {
 					message.addClass('message-error');
 					message.html(data.output['message']);
@@ -249,20 +252,26 @@ $().ready(function() {
 			},
 			success: function(data) {
 				if (data.success) {
-					/*
-					// previously no maps
-					if (!$('.nav-container-maps .nav-container-options-item').length) {
-						$('.nav-container-maps').removeClass('nav-container--empty');
+					var map;
+
+					if (data.output['new']) {
+						map = $('[data-view="maps"] .nav-tabs-container-item-template').clone();
+						map.find('.fa').addClass(data.output['fields']['icon']);
+						map.attr('data-id', data.output['fields']['id']);
+						$('[data-view="maps"] .nav-tabs-container-buttons').before(map);
+						map.css('display', 'flex');
+					} else {
+						map = $('[data-view="maps"] .nav-tabs-container-item[data-id=' + data.output['fields']['id'] + ']');
 					}
 
-					var map = $("<div class='nav-container-options-item'></div>");
-					account.html("<i class='fa " + data.output['icon'] + "' aria-hidden='true'></i>" + data.output['name']);
-					account.hide();
-					$('.nav-container-maps .nav-container-options').append(map);
-					account.slideDown(500);
+					map.attr('data-fields', JSON.stringify(data.output['fields']));
+					map.find('.nav-tabs-container-item-info-name').text(data.output['fields']['name']);
+					map.find('.nav-tabs-container-item-info-details').text(data.output['fields']['detail']);
+					$('[data-view="maps"]').openNavElement();
 
-					$(document).closeSubNav();
-					*/
+					setTimeout(function() {
+						map.animate({'opacity': 1}, 800);
+					}, 300);
 				} else {
 					message.addClass('message-error');
 					message.html(data.output['message']);
