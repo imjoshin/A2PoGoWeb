@@ -30,43 +30,9 @@ function initMap() {
 	});
 
 	var centerControlDiv = document.createElement('div');
-	var addRectControl = createControl('<i class="fa fa-plus-square-o"></i>', "Add a rectangle to the map", function() {
-		var center = map.getCenter();
-
-		var rect = new google.maps.Rectangle({
-			type: 'rect',
-			strokeColor: '#EA231C',
-			strokeOpacity: 0.8,
-			strokeWeight: 2,
-			fillColor: '#EA231C',
-			fillOpacity: 0.15,
-			editable: true,
-			draggable: true,
-			map: map,
-			bounds: {
-				north: center.lat() + 0.005,
-				south: center.lat() - 0.005,
-				east: center.lng() + 0.014,
-				west: center.lng() - 0.002
-			}
-		});
-
-		shapes.push(rect);
-	});
-
-	var removeRectControl = createControl('<i class="fa fa-minus-square-o"></i>', "Remove the last rectangle from the map", function() {
-		if (shapes.length) {
-			var rect = shapes.pop();
-			rect.setMap(null);
-		}
-	});
-
-	var trashControl = createControl('<i class="fa fa-trash-o"></i>', "Remove all shapes from the map", function() {
-		$.each(shapes, function(k, shape) {
-			shape.setMap(null);
-		});
-		shapes = [];
-	});
+	var addRectControl = createControl('<i class="fa fa-plus-square-o"></i>', "Add a rectangle to the map", addRect);
+	var removeRectControl = createControl('<i class="fa fa-minus-square-o"></i>', "Remove the last rectangle from the map", removeShape);
+	var trashControl = createControl('<i class="fa fa-trash-o"></i>', "Remove all shapes from the map", removeAllShapes);
 
 	centerControlDiv.appendChild(addRectControl);
 	centerControlDiv.appendChild(removeRectControl);
@@ -75,6 +41,44 @@ function initMap() {
 
 	centerControlDiv.index = 1;
 	map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+}
+
+function addRect() {
+	var center = map.getCenter();
+
+	var rect = new google.maps.Rectangle({
+		type: 'rect',
+		strokeColor: '#EA231C',
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: '#EA231C',
+		fillOpacity: 0.15,
+		editable: true,
+		draggable: true,
+		map: map,
+		bounds: {
+			north: center.lat() + 0.005,
+			south: center.lat() - 0.005,
+			east: center.lng() + 0.014,
+			west: center.lng() - 0.002
+		}
+	});
+
+	shapes.push(rect);
+}
+
+function removeShape() {
+	if (shapes.length) {
+		var shape = shapes.pop();
+		shape.setMap(null);
+	}
+}
+
+function removeAllShapes() {
+	$.each(shapes, function(k, shape) {
+		shape.setMap(null);
+	});
+	shapes = [];
 }
 
 function createControl(text, title, callback) {
@@ -103,6 +107,7 @@ function showMapDrawing(rects) {
 
 function hideMapDrawing() {
 	$('.map-container-control').removeClass('map-container-control--active');
+	removeAllShapes();
 }
 
 function getRects() {
