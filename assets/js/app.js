@@ -205,10 +205,11 @@ $().ready(function() {
 					if (data.output['new']) {
 						// previously no accounts
 						if (!$('.nav-container-accounts .nav-container-options-item').length) {
-							$('.nav-container-maps').removeClass('disabled');
+							$('.nav-tabs-item[data-view="maps"]').removeClass('disabled');
 						}
 
 						account = $('[data-view="accounts"] .nav-tabs-container-item-template').clone();
+						account.removeClass('nav-tabs-container-item-template');
 						account.find('.fa').addClass(data.output['fields']['icon']);
 						account.attr('data-id', data.output['fields']['id']);
 						$('[data-view="accounts"] .nav-tabs-container-buttons').before(account);
