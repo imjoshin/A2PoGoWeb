@@ -234,6 +234,8 @@ $().ready(function() {
 	});
 
 	$('[data-view="map-form"] .btn-save').on('click', function() {
+		console.log(getRects());
+
 		form = $('.nav-form-map');
 		message = form.parent().parent().find('.message');
 

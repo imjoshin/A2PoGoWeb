@@ -35,10 +35,12 @@ $().ready(function() {
 				activeContainer.removeClass('nav-tabs-container--active');
 			}
 
+			hideMapDrawing();
 			view.addClass('nav-tabs-item--active');
 		}
 
 		viewContainer.addClass('nav-tabs-container--active');
+
 	}
 
 
@@ -51,6 +53,8 @@ $().ready(function() {
 			$('.nav-form-address-verification .btn').show();
 			$('#verification').hide();
 		} else if (button.parents('[data-view="maps"]').length) {
+			showMapDrawing({});
+
 			$('#map-accounts').empty();
 			updateMonForm('-1');
 			// get accounts
@@ -84,6 +88,8 @@ $().ready(function() {
 			$('.nav-form-address-verification .btn').show();
 			$('#verification').hide();
 		} else if (item.parents('[data-view="maps"]').length) {
+			showMapDrawing({});
+
 			$('#map-accounts').empty();
 
 			// get accounts

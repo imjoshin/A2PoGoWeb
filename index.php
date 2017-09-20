@@ -19,8 +19,8 @@
 	}
 ?>
 
-<div id="map-container">
-	<div id="map"></div>
+<div class="map-container">
+	<div class="map-container-object" id="map-container-object"></div>
 </div>
 
 <?php include "footer.php" ?>

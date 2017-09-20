@@ -12,7 +12,7 @@
   <script src="dist/js/jquery-3.2.1.min.js"></script>
   <script src="dist/js/foundation.min.js"></script>
   <script src="dist/js/app.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg_CzyJssH4PQZ_Wf0uA36N0Jy6Oh30Es&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg_CzyJssH4PQZ_Wf0uA36N0Jy6Oh30Es&callback=initMap&libraries=drawing"></script>
 
 </head>
 

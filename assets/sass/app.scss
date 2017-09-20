@@ -8,12 +8,96 @@ body {
 	overflow: hidden;
 }
 
-#map-container {
+.map-container {
 	height: 100%;
 
-	#map {
+	&-object {
 		height: 100%;
 	}
+
+	&-control {
+		background-color: $dark-blue;
+		color: $white;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px;
+		padding: 10px;
+		top: -100px !important;
+		transition: top .5s;
+
+		&--active {
+			top: 0px !important;
+		}
+
+		&-center {
+			cursor: pointer;
+			text-align: center;
+			display: inline-block;
+			transition: color .3s;
+
+			&-text {
+				font-size: 30px;
+				padding: 0 10px;
+			}
+
+			&:hover {
+				color: mix($yellow, $white, 35%);
+			}
+		}
+	}
+
+	&-control-block {
+		display: none;
+		position: absolute;
+		background-color: $red;
+		opacity: .3;
+		height: 70px;
+		width: 100px;
+		margin-left: -50px;
+		border-radius: 20px;
+		top: -20px;
+		left: 50%;
+		z-index: 1;
+		pointer-events: none;
+
+		&-inner {
+			background-color: white;
+			width: 48px;
+			height: 23px;
+			position: relative;
+			top: 26px;
+			left: 26px;
+		}
+
+		&-arrow {
+			display: none;
+		}
+
+		&.new {
+			#map-container-control-block-arrow {
+				position: absolute;
+				display: block;
+				top: 18px;
+				font-size: 40px;
+				color: red;
+				margin-left: -45px;
+				-webkit-animation-name: point;
+				-moz-animation-name: point;
+				-o-animation-name: point;
+				animation-name: point;
+				animation-duration: 1s;
+				animation-timing-function: ease-in-out;
+				animation-delay: 0s;
+				animation-direction: normal;
+				animation-iteration-count: infinite;
+			}
+		}
+	}
+}
+
+@keyframes point {
+	0%, 100% {transform: translateY(0);opacity: 1;}
+	50% {transform: translateX(-15px);}
 }
 
 .modal-wrapper {
