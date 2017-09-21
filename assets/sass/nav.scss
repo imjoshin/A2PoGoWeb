@@ -186,4 +186,20 @@ $nav-width: 400px;
 			}
 		}
 	}
+
+	&-footer {
+		width: 100%;
+		font-size: 12px;
+		position: absolute;
+		z-index: 11;
+		bottom: 0;
+		background-color: $blue;
+		color: $white;
+		text-align: center;
+		padding: 3px;
+
+		a {
+			color: $white;
+		}
+	}
 }

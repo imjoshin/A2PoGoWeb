@@ -81,4 +81,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="nav-footer">
+		All data is from <a href='https://www.joshwoodward.com/mod/pokemon/map/#1011100030' target='_blank'>Josh Woodward's Pokemap</a>
+	</div>
 </div>
