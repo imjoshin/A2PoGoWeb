@@ -14,8 +14,6 @@
 					<option value='discord'>Discord</option>
 				</select>
 			</div>
-			<div class="columns small-3 form-field" data-type="address-email">
-			</div>
 			<div class="columns small-6 form-field" data-type="address-email">
 				<h3>Address</h3>
 				<input type="text" id="address" name="address" class="non-editable-input">
@@ -128,7 +126,6 @@
 						<i class="fa fa-info-circle"></i>
 						<div class="info-icon-content">
 							Variables for use:<br/>
-							%NAME% - Pokemon Name<br/>
 							%MAPNAME% - Map Name<br/>
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
@@ -146,7 +143,6 @@
 						<i class="fa fa-info-circle"></i>
 						<div class="info-icon-content">
 							Variables for use:<br/>
-							%NAME% - Pokemon Name<br/>
 							%MAPNAME% - Map Name<br/>
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
