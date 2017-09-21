@@ -60,28 +60,56 @@
 			</div>
 			<div class="columns small-6 form-field">
 				<h3>Raids</h3>
-				<table>
-					<tr>
-						<td><input type="checkbox" id="raids[1]" name="raids[1]" /></td>
-						<td>Level 1</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="raids[2]" name="raids[2]" /></td>
-						<td>Level 2</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="raids[3]" name="raids[3]" /></td>
-						<td>Level 3</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="raids[4]" name="raids[4]" /></td>
-						<td>Level 4</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="raids[5]" name="raids[5]" notab/></td>
-						<td>Level 5</td>
-					</tr>
-				</table>
+				<div class="row grid-x">
+					<div class="columns small-6">
+						<table>
+							<tr>
+								<td><input type="checkbox" id="raids[1]" name="raids[1]" /></td>
+								<td>Level 1</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raids[2]" name="raids[2]" /></td>
+								<td>Level 2</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raids[3]" name="raids[3]" /></td>
+								<td>Level 3</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raids[4]" name="raids[4]" /></td>
+								<td>Level 4</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raids[5]" name="raids[5]" notab/></td>
+								<td>Level 5</td>
+							</tr>
+						</table>
+					</div>
+					<div class="columns small-6">
+						<table>
+							<tr>
+								<td><input type="checkbox" id="raid-eggs[1]" name="raid-eggs[1]" /></td>
+								<td>Egg 1</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raid-eggs[2]" name="raid-eggs[2]" /></td>
+								<td>Egg 2</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raid-eggs[3]" name="raid-eggs[3]" /></td>
+								<td>Egg 3</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raid-eggs[4]" name="raid-eggs[4]" /></td>
+								<td>Egg 4</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" id="raid-eggs[5]" name="raid-eggs[5]" notab/></td>
+								<td>Egg 5</td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<input type="hidden" name="pokemon-selected" id="pokemon-selected" value="" />

@@ -102,6 +102,13 @@ class Account
 			));
 		}
 
+		if (strlen($form['pokemon-format']) > 512 || strlen($form['raid-format']) > 512 || strlen($form['raid-egg-format']) > 512)
+		{
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Format must not exceed 512 characters."
+			));
+		}
+
 		if ($form['type'] === 'phone' || $form['type'] === 'email')
 		{
 			if ($form['new'])
@@ -123,12 +130,12 @@ class Account
 					));
 				}
 
-				db_query("INSERT INTO account(user_id, name, address, type, pokemon_format, raid_format) VALUES (?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type']), $form['pokemon-format'], $form['raid-format']));
+				db_query("INSERT INTO account(user_id, name, address, type, pokemon_format, raid_format, raid_egg_format) VALUES (?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $address, strtolower($form['type']), $form['pokemon-format'], $form['raid-format'], $form['raid-egg-format']));
 				db_query("DELETE FROM verification WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
 			}
 			else
 			{
-				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $form['id'], $_SESSION['id']));
+				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ?, raid_egg_format = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $form['raid-egg-format'], $form['id'], $_SESSION['id']));
 			}
 
 		}
@@ -154,19 +161,27 @@ class Account
 				));
 			}
 
+			if (strlen($form['pokemon-user']) > 64 || strlen($form['raid-user']) > 64 || strlen($form['raid-egg-user']) > 64)
+			{
+				return array('success'=>false, 'output'=>array(
+					"message"=>"Users must not exceed 64 characters."
+				));
+			}
+
 			$extra = json_encode(array(
 				'channel'=>$form['channel'],
 				'pokemon_user'=>$form['pokemon-user'],
 				'raid_user'=>$form['raid-user'],
+				'raid_egg_user'=>$form['raid-egg-user'],
 			));
 
 			if ($form['new'])
 			{
-				db_query("INSERT INTO account(user_id, name, address, type, extra) VALUES (?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $form['webhook'], strtolower($form['type']), $extra));
+				db_query("INSERT INTO account(user_id, name, address, type, pokemon_format, raid_format, raid_egg_format, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $form['webhook'], strtolower($form['type']), $form['pokemon-format'], $form['raid-format'], $form['raid-egg-format'], $extra));
 			}
 			else
 			{
-				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ?, extra = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $extra, $form['id'], $_SESSION['id']));
+				db_query("UPDATE account SET name = ?, pokemon_format = ?, raid_format = ?, raid_egg_format = ?, extra = ? WHERE id = ? AND user_id = ?", array($name, $form['pokemon-format'], $form['raid-format'], $form['raid-egg-format'], $extra, $form['id'], $_SESSION['id']));
 			}
 		}
 

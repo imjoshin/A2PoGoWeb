@@ -68,7 +68,7 @@
 						</div>
 					</div>
 				</h3>
-				<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%"><br/>
+				<input type="text" id="pokemon-user" name="pokemon-user" class="formatter" value="%NAME%" maxlength="64"><br/>
 			</div>
 			<div class="columns small-6 form-field">
 				<h3>
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 				</h3>
-				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%."><br/>
+				<input type="text" id="pokemon-format" name="pokemon-format" class="formatter" value="Active in %MAPNAME% until %ENDTIME%." maxlength="512"><br/>
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 				</h3>
-				<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)"><br/>
+				<input type="text" id="raid-user" name="raid-user" class="formatter" value="RAID: %NAME% (Level %RAIDLEVEL%)" maxlength="64"><br/>
 			</div>
 			<div class="columns small-6 form-field">
 				<h3>
@@ -119,9 +119,43 @@
 						</div>
 					</div>
 				</h3>
-				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%." notab><br/>
+				<input type="text" id="raid-format" name="raid-format" class="formatter" value="Active at %GYMNAME% until %ENDTIME%." maxlength="512"><br/>
 			</div>
-			<div class="columns small-3 form-field nav-form-address-verification hidden-edit-input" data-type="address">
+			<div class="columns small-6 form-field" data-type="webhook">
+				<h3>
+					Raid Egg User
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%GYMNAME% - Gym Name<br/>
+							%STARTTIME% - Start Time<br/>
+							%ENDTIME% - End Time<br/>
+							%RAIDLEVEL% - Raid Level
+						</div>
+					</div>
+				</h3>
+				<input type="text" id="raid-egg-user" name="raid-egg-user" class="formatter" value="Raid Incoming!" maxlength="64"><br/>
+			</div>
+			<div class="columns small-6 form-field">
+				<h3>
+					Raid Egg Format
+					<div class="info-icon">
+						<i class="fa fa-info-circle"></i>
+						<div class="info-icon-content">
+							Variables for use:<br/>
+							%NAME% - Pokemon Name<br/>
+							%MAPNAME% - Map Name<br/>
+							%GYMNAME% - Gym Name<br/>
+							%STARTTIME% - Start Time<br/>
+							%ENDTIME% - End Time<br/>
+							%RAIDLEVEL% - Raid Level
+						</div>
+					</div>
+				</h3>
+				<input type="text" id="raid-egg-format" name="raid-egg-format" class="formatter" value="A level %RAIDLEVEL% raid will be at %GYMNAME% starting at %STARTTIME%." maxlength="512"><br/>
 			</div>
 			<div class="columns small-6 form-field nav-form-address-verification hidden-edit-input" data-type="address">
 				<h3>Verification Code</h3>

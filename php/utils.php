@@ -121,6 +121,18 @@ function formatMap($map)
 		}
 	}
 
+	if (strpos($map['raid_eggs'], ",") === false)
+	{
+		$newMap["raid-eggs[{$map['raid_eggs']}]"] = "on";
+	}
+	else
+	{
+		foreach(explode(',', $map['raid_eggs']) as $egg)
+		{
+			$newMap["raid-eggs[{$egg}]"] = "on";
+		}
+	}
+
 	if (strlen($map['days']) > 0 && preg_match('/\\d/', $map['days']))
 	{
 		$newMap["detail"] = formatDays($map['days']) . " / " . strtoupper(date("g:i a", strtotime($map["start_time"])) . ' - ' . date("g:i a", strtotime($map["end_time"])));
