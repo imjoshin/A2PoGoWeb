@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row nav-tabs">
 			<div class="nav-tabs-item nav-tabs-item--active" data-view="accounts">
-				Accounts
+				Feeds
 			</div>
 			<div class="nav-tabs-item <?php echo (count($accounts) <= 1 ? 'disabled' : ''); ?>" data-view="maps">
 				Maps
@@ -35,7 +35,7 @@
 				?>
 				<div class='row grid-x nav-tabs-container-buttons'>
 					<div class='columns small-12'>
-						<span class="btn btn-white btn-add" data-name="Add Account" data-view="account-form">Add Account</span>
+						<span class="btn btn-white btn-add" data-name="Add Feed" data-view="account-form">Add Feed</span>
 					</div>
 				</div>
 			</div>

@@ -44,6 +44,11 @@ function initMap() {
 }
 
 function addRect() {
+	if (shapes.length >= 15) {
+		alert("No more than 15 shapes can be added.");
+		return;
+	}
+	
 	var center = map.getCenter();
 
 	var rect = new google.maps.Rectangle({
@@ -97,12 +102,33 @@ function createControl(text, title, callback) {
 	return controlUI;
 }
 
-function showMapDrawing(rects) {
+function showMapDrawing(showShapes) {
 	$('.map-container-control').addClass('map-container-control--active');
+	shapes = [];
 
-	// $.each(rects, function(k, rect) {
-	//
-	// });
+	$.each(showShapes, function(k, shape) {
+		if (shape.type = 'rect') {
+			var rect = new google.maps.Rectangle({
+				type: 'rect',
+				strokeColor: '#EA231C',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '#EA231C',
+				fillOpacity: 0.15,
+				editable: true,
+				draggable: true,
+				map: map,
+				bounds: {
+					north: shape.max_lat,
+					south: shape.min_lat,
+					east: shape.max_lng,
+					west: shape.min_lng
+				}
+			});
+
+			shapes.push(rect);
+		}
+	});
 }
 
 function hideMapDrawing() {
@@ -110,7 +136,7 @@ function hideMapDrawing() {
 	removeAllShapes();
 }
 
-function getRects() {
+function getMapShapes() {
 	var ret = [];
 	$.each(shapes, function(k, shape) {
 		if (shape.type = 'rect') {
@@ -118,6 +144,7 @@ function getRects() {
 			var ne = bounds.getNorthEast();
 			var sw = bounds.getSouthWest();
 			ret.push({
+				'type': 'rect',
 				'max_lat': ne.lat(),
 				'min_lat': sw.lat(),
 				'max_lng': ne.lng(),

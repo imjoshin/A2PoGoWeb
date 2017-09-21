@@ -43,7 +43,6 @@ $().ready(function() {
 
 	}
 
-
 	function openAdd(button) {
 		// new map/account
 		window.new = true;
@@ -88,7 +87,7 @@ $().ready(function() {
 			$('.nav-form-address-verification .btn').show();
 			$('#verification').hide();
 		} else if (item.parents('[data-view="maps"]').length) {
-			showMapDrawing({});
+			showMapDrawing($.parseJSON(fields['boundaries']));
 
 			$('#map-accounts').empty();
 

@@ -4,6 +4,7 @@ class Map
 {
 	public static function saveMap($form)
 	{
+		error_log(var_export($form, 1));
 		$name = trim($form['name']);
 
 		if (!preg_match('/[a-zA-Z0-9 ._-]{1,32}$/', $name))
@@ -52,12 +53,12 @@ class Map
 
 		if ($form['new'])
 		{
-			db_query("INSERT INTO map(user_id, name, accounts, pokemon, raids, days, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $accounts, $form['pokemon-selected'], $raids, $days, $form['start-time'], $form['end-time']));
+			db_query("INSERT INTO map(user_id, name, accounts, pokemon, raids, days, boundaries, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $accounts, $form['pokemon-selected'], $raids, $days, $form['boundaries'], $form['start-time'], $form['end-time']));
 			$map = db_query("SELECT * FROM map WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
 		}
 		else
 		{
-			db_query("UPDATE map SET name = ?, accounts = ?, pokemon = ?, raids = ?, days = ?, start_time = ?, end_time = ? WHERE id = ? AND user_id = ? ", array($name, $accounts, $form['pokemon-selected'], $raids, $days, $form['start-time'], $form['end-time'],$form['id'], $_SESSION['id']));
+			db_query("UPDATE map SET name = ?, accounts = ?, pokemon = ?, raids = ?, days = ?, boundaries = ?, start_time = ?, end_time = ? WHERE id = ? AND user_id = ? ", array($name, $accounts, $form['pokemon-selected'], $raids, $days, $form['boundaries'], $form['start-time'], $form['end-time'],$form['id'], $_SESSION['id']));
 			$map = db_query("SELECT * FROM map WHERE id = ? AND user_id = ?", array($form['id'], $_SESSION['id']));
 		}
 

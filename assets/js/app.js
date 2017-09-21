@@ -235,13 +235,13 @@ $().ready(function() {
 	});
 
 	$('[data-view="map-form"] .btn-save').on('click', function() {
-		console.log(getRects());
-
 		form = $('.nav-form-map');
 		message = form.parent().parent().find('.message');
+		boundaries = getMapShapes();
 
 		form.append("<input type='hidden' class='temp' name='new' value='" + (window.new ? 1 : 0) + "'>");
 		form.append("<input type='hidden' class='temp' name='id' value='" + window.id + "'>");
+		form.append("<input type='hidden' class='temp' name='boundaries' value='" + JSON.stringify(boundaries) + "'>");
 		serialized = form.serialize();
 		$("input.temp").remove();
 

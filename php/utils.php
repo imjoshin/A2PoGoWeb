@@ -83,6 +83,7 @@ function formatMap($map)
 	$newMap['start-time'] = $map['start_time'];
 	$newMap['end-time'] = $map['end_time'];
 	$newMap['pokemon'] = $map['pokemon'];
+	$newMap['boundaries'] = $map['boundaries'];
 
 	if (strpos($map['days'], ",") === false)
 	{
