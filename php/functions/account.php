@@ -25,7 +25,7 @@ class Account
 			));
 		}
 
-		$namecheck = db_query("SELECT name FROM account WHERE address = ? AND user_id = ?", array($address, $_SESSION['id']));
+		$namecheck = db_query("SELECT name FROM account WHERE address = ? AND user_id = ? AND rtime = 0", array($address, $_SESSION['id']));
 		if (count($namecheck))
 		{
 			return array('success'=>false, 'output'=>array(
@@ -88,11 +88,11 @@ class Account
 
 		if ($form['new'])
 		{
-			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ? AND rtime = 0", array($name, $_SESSION['id']));
 		}
 		else
 		{
-			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ? AND id != ?", array($name, $_SESSION['id'], $form['id']));
+			$namecheck = db_query("SELECT name FROM account WHERE name = ? AND user_id = ? AND id != ? AND rtime = 0", array($name, $_SESSION['id'], $form['id']));
 		}
 
 		if (count($namecheck))
@@ -215,6 +215,12 @@ class Account
 			"fields"=>formatAccount($account[0]),
 			"new"=>($form['new'] ? true : false)
 		));
+	}
+
+	public static function deleteAccount($accountId)
+	{
+		$ret = db_query("UPDATE account SET rtime = NOW() WHERE id = ? AND user_id = ?", array($accountId, $_SESSION['id']));
+		return array("success"=>true);
 	}
 }
 

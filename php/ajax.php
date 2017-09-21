@@ -51,8 +51,14 @@ switch(strtolower($_POST['call']))
 	case 'save_account':
 		$ret = Account::saveAccount($_POST);
 		break;
+	case 'delete_account':
+		$ret = Account::deleteAccount($_POST['id']);
+		break;
 	case 'save_map':
 		$ret = Map::saveMap($_POST);
+		break;
+	case 'delete_map':
+		$ret = Map::deleteMap($_POST['id']);
 		break;
 }
 

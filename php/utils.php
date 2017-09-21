@@ -54,7 +54,7 @@ function formatAccount($account)
 
 function getAccounts($includeTemplate = true)
 {
-	$accounts = db_query("SELECT * FROM account WHERE user_id = ?", array($_SESSION['id']));
+	$accounts = db_query("SELECT * FROM account WHERE user_id = ? AND rtime = 0", array($_SESSION['id']));
 	$returnAccounts = array();
 
 	foreach ($accounts as $account)
@@ -161,7 +161,7 @@ function formatMap($map)
 
 function getMaps($includeTemplate = true)
 {
-	$maps = db_query("SELECT * FROM map WHERE user_id = ?", array($_SESSION['id']));
+	$maps = db_query("SELECT * FROM map WHERE user_id = ? AND rtime = 0", array($_SESSION['id']));
 	$returnMaps = array();
 
 	foreach ($maps as $map)

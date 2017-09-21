@@ -118,8 +118,16 @@ $nav-width: 400px;
 					cursor: pointer;
 				}
 
-				&:hover, & :hover {
+				&:hover, :hover {
 					color: mix($yellow, $white, 35%);
+				}
+
+				&:hover {
+					.nav-tabs-container-item-info {
+						&-delete {
+							display: block;
+						}
+					}
 				}
 
 				&-icon {
@@ -143,6 +151,21 @@ $nav-width: 400px;
 					&-details {
 						font-size: 11px;
 						opacity: .5;
+					}
+
+					&-delete {
+						color: $white;
+						display: none;
+						position: absolute;
+					    right: 15px;
+					    margin-top: -25px;
+						opacity: .2;
+						transition: color .2s ease-in, color .4s ease-out, opacity .3s;
+
+						&:hover {
+							color: $red;
+							opacity: .8;
+						}
 					}
 				}
 

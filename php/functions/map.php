@@ -15,11 +15,11 @@ class Map
 
 		if ($form['new'])
 		{
-			$namecheck = db_query("SELECT name FROM map WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
+			$namecheck = db_query("SELECT name FROM map WHERE name = ? AND user_id = ? AND rtime = 0", array($name, $_SESSION['id']));
 		}
 		else
 		{
-			$namecheck = db_query("SELECT name FROM map WHERE name = ? AND user_id = ? AND id != ?", array($name, $_SESSION['id'], $form['id']));
+			$namecheck = db_query("SELECT name FROM map WHERE name = ? AND user_id = ? AND id != ? AND rtime = 0", array($name, $_SESSION['id'], $form['id']));
 		}
 
 		if (count($namecheck))
@@ -66,6 +66,12 @@ class Map
 			"fields"=>formatMap($map[0]),
 			"new"=>($form['new'] ? true : false)
 		));
+	}
+
+	public static function deleteMap($accountId)
+	{
+		$ret = db_query("UPDATE map SET rtime = NOW() WHERE id = ? AND user_id = ?", array($accountId, $_SESSION['id']));
+		return array("success"=>true);
 	}
 }
 

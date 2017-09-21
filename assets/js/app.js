@@ -139,6 +139,30 @@ $().ready(function() {
 		$(".popover").remove();
 	});
 
+	$(document).on('click', '.nav-tabs-container-item-info-delete', function(e) {
+		e.stopPropagation();
+		var item = $(this).parents('.nav-tabs-container-item');
+		var id = item.attr('data-id');
+		var type = item.parents('.nav-tabs-container').attr('data-view').slice(0, -1);
+
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "php/ajax.php",
+			data: {
+				call: 'delete_' + type,
+				id: id
+			},
+			success: function(data) {
+				if (data.success) {
+					item.slideUp(500, function() {
+						item.remove();
+					});
+				}
+			}
+		});
+	});
+
 	// address verification
 	$(document).on('click', '.nav-form-address-verification .btn:not(.disabled)', function() {
 		button = $(this);

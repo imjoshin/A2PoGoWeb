@@ -29,6 +29,9 @@
 								<div class='row nav-tabs-container-item-info-details'>
 									<label class='account-address'>{$account['detail']}</label>
 								</div>
+								<div class='row nav-tabs-container-item-info-delete'>
+									<i class='fa fa-times-circle'></i>
+								</div>
 							</div>
 						</div>";
 					}
@@ -54,6 +57,9 @@
 								</div>
 								<div class='row nav-tabs-container-item-info-details'>
 									<label class='account-address'>{$map['detail']}</label>
+								</div>
+								<div class='row nav-tabs-container-item-info-delete'>
+									<i class='fa fa-times-circle'></i>
 								</div>
 							</div>
 						</div>";
