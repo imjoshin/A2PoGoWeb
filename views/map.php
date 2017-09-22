@@ -8,7 +8,7 @@
 		</div>
 		<div class="row grid-x">
 			<div class="columns small-6 form-field">
-				<h3>Accounts</h3>
+				<h3>Feeds</h3>
 				<table id='map-accounts'></table>
 			</div>
 			<div class="columns small-6 form-field">

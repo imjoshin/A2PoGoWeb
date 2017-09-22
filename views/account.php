@@ -11,7 +11,7 @@
 					<option value='phone'>Phone</option>
 					<option value='email'>Email</option>
 					<option value='slack'>Slack</option>
-					<option value='discord'>Discord</option>
+					<?php //<option value='discord'>Discord</option> ?>
 				</select>
 			</div>
 			<div class="columns small-6 form-field" data-type="address-email">
@@ -61,8 +61,10 @@
 						<div class="info-icon-content">
 							Variables for use:<br/>
 							%NAME% - Pokemon Name<br/>
+							%NUMBER% - Pokemon Number<br/>
 							%MAPNAME% - Map Name<br/>
-							%ENDTIME% - Despawn Time
+							%ENDTIME% - Despawn Time<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>
@@ -76,8 +78,10 @@
 						<div class="info-icon-content">
 							Variables for use:<br/>
 							%NAME% - Pokemon Name<br/>
+							%NUMBER% - Pokemon Number<br/>
 							%MAPNAME% - Map Name<br/>
-							%ENDTIME% - Despawn Time
+							%ENDTIME% - Despawn Time<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>
@@ -91,11 +95,13 @@
 						<div class="info-icon-content">
 							Variables for use:<br/>
 							%NAME% - Pokemon Name<br/>
+							%NUMBER% - Pokemon Number<br/>
 							%MAPNAME% - Map Name<br/>
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
 							%ENDTIME% - End Time<br/>
-							%RAIDLEVEL% - Raid Level
+							%RAIDLEVEL% - Raid Level<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>
@@ -109,11 +115,13 @@
 						<div class="info-icon-content">
 							Variables for use:<br/>
 							%NAME% - Pokemon Name<br/>
+							%NUMBER% - Pokemon Number<br/>
 							%MAPNAME% - Map Name<br/>
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
 							%ENDTIME% - End Time<br/>
-							%RAIDLEVEL% - Raid Level
+							%RAIDLEVEL% - Raid Level<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>
@@ -130,7 +138,8 @@
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
 							%ENDTIME% - End Time<br/>
-							%RAIDLEVEL% - Raid Level
+							%RAIDLEVEL% - Raid Level<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>
@@ -147,7 +156,8 @@
 							%GYMNAME% - Gym Name<br/>
 							%STARTTIME% - Start Time<br/>
 							%ENDTIME% - End Time<br/>
-							%RAIDLEVEL% - Raid Level
+							%RAIDLEVEL% - Raid Level<br/>
+							%URL% - URL to Google Maps
 						</div>
 					</div>
 				</h3>

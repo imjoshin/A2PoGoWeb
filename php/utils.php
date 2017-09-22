@@ -190,8 +190,8 @@ function formatDays($days)
 		$days .= ",";
 	}
 
-	$daysArr = explode(',', $days);
-
+	$daysArr = array_filter(explode(',', $days), function($value) { return $value !== ''; });
+	
 	if (count($daysArr) == 7)
 	{
 		return "Daily";

@@ -46,19 +46,20 @@ class Map
 			));
 		}
 
-		$days = isset($form['days']) ? implode(',', array_keys($form['days'])) : "";
-		$accounts = isset($form['accounts']) ? implode(',', array_keys($form['accounts'])) : "";
-		$raids = isset($form['raids']) ? implode(',', array_keys($form['raids'])) : "";
-		$raidEggs = isset($form['raid-eggs']) ? implode(',', array_keys($form['raid-eggs'])) : "";
+		$days = isset($form['days']) ? ',' . implode(',', array_keys($form['days'])) . ',' : "";
+		$accounts = isset($form['accounts']) ? ',' . implode(',', array_keys($form['accounts'])) . ',' : "";
+		$raids = isset($form['raids']) ? ',' . implode(',', array_keys($form['raids'])) . ',' : "";
+		$raidEggs = isset($form['raid-eggs']) ? ',' . implode(',', array_keys($form['raid-eggs'])) . ',' : "";
+		$pokemon = ',' . $form['pokemon-selected'] . ',';
 
 		if ($form['new'])
 		{
-			db_query("INSERT INTO map(user_id, name, accounts, pokemon, raids, raid_eggs, days, boundaries, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $accounts, $form['pokemon-selected'], $raids, $raidEggs, $days, $form['boundaries'], $form['start-time'], $form['end-time']));
+			db_query("INSERT INTO map(user_id, name, accounts, pokemon, raids, raid_eggs, days, boundaries, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($_SESSION['id'], $name, $accounts, $pokemon, $raids, $raidEggs, $days, $form['boundaries'], $form['start-time'], $form['end-time']));
 			$map = db_query("SELECT * FROM map WHERE name = ? AND user_id = ?", array($name, $_SESSION['id']));
 		}
 		else
 		{
-			db_query("UPDATE map SET name = ?, accounts = ?, pokemon = ?, raids = ?, raid_eggs = ?, days = ?, boundaries = ?, start_time = ?, end_time = ? WHERE id = ? AND user_id = ? ", array($name, $accounts, $form['pokemon-selected'], $raids, $raidEggs, $days, $form['boundaries'], $form['start-time'], $form['end-time'],$form['id'], $_SESSION['id']));
+			db_query("UPDATE map SET name = ?, accounts = ?, pokemon = ?, raids = ?, raid_eggs = ?, days = ?, boundaries = ?, start_time = ?, end_time = ? WHERE id = ? AND user_id = ? ", array($name, $accounts, $pokemon, $raids, $raidEggs, $days, $form['boundaries'], $form['start-time'], $form['end-time'],$form['id'], $_SESSION['id']));
 			$map = db_query("SELECT * FROM map WHERE id = ? AND user_id = ?", array($form['id'], $_SESSION['id']));
 		}
 

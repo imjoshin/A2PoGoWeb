@@ -74,9 +74,10 @@ $().ready(function() {
 			'%MAPNAME%': 'Test Map',
 			'%ENDTIME%': '2:34:56 PM',
 		}
-		
+
 		if ($(this).attr('id').indexOf('raid-egg') < 0) {
 			variables['%NAME%'] = "Pikachu";
+			variables['%NUMBER%'] = "25";
 		}
 
 		if ($(this).attr('id').indexOf('raid') >= 0) {
