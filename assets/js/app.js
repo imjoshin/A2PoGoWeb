@@ -38,6 +38,8 @@ $().ready(function() {
 
 	$('#type').on('change', function() {
 		if ($(this).val() == "phone" || $(this).val() == "email") {
+			$('[data-type="webhook-slack"]').hide();
+			$('[data-type="webhook-discord"]').hide();
 			$('[data-type="webhook"]').hide();
 			$('[data-type="address"]').show();
 
@@ -53,6 +55,14 @@ $().ready(function() {
 			$('[data-type="address-email"]').hide();
 			$('[data-type="address"]').hide();
 			$('[data-type="webhook"]').show();
+
+			if($(this).val() == "slack") {
+				$('[data-type="webhook-slack"]').show();
+				$('[data-type="webhook-discord"]').hide();
+			} else {
+				$('[data-type="webhook-slack"]').hide();
+				$('[data-type="webhook-discord"]').show();
+			}
 		}
 
 		$('.sub-nav .message').empty();

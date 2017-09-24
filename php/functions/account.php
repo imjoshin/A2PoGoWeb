@@ -154,7 +154,7 @@ class Account
 				));
 			}
 
-			if (strlen($form['channel']) < 8)
+			if ($form['type'] === "slack" && strlen($form['channel']) < 8)
 			{
 				return array('success'=>false, 'output'=>array(
 					"message"=>"Invalid channel ID."

@@ -15,18 +15,22 @@ function initMap() {
 		},
 	});
 
-	var rectangle = new google.maps.Rectangle({
-		strokeColor: '#ffcb05',
-		strokeOpacity: 0.8,
-		strokeWeight: 2,
-		fillOpacity: 0,
-		map: map,
-		bounds: {
-			north: 42.293110,
-			south: 42.260220,
-			east: -83.713523,
-			west: -83.770088
-		}
+	boundaries = $.parseJSON($('.map-container').attr('data-boundaries'));
+
+	$.each(boundaries, function(input, coords) {
+		rectangle = new google.maps.Rectangle({
+			strokeColor: '#EA231C',
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillOpacity: 0,
+			map: map,
+			bounds: {
+				north: coords['lat_max'],
+				south: coords['lat_min'],
+				east: coords['lng_max'],
+				west: coords['lng_min']
+			}
+		});
 	});
 
 	var centerControlDiv = document.createElement('div');
@@ -48,15 +52,15 @@ function addRect() {
 		alert("No more than 15 shapes can be added.");
 		return;
 	}
-	
+
 	var center = map.getCenter();
 
 	var rect = new google.maps.Rectangle({
 		type: 'rect',
-		strokeColor: '#EA231C',
+		strokeColor: '#00ba00',
 		strokeOpacity: 0.8,
 		strokeWeight: 2,
-		fillColor: '#EA231C',
+		fillColor: '#00ba00',
 		fillOpacity: 0.15,
 		editable: true,
 		draggable: true,
@@ -110,10 +114,10 @@ function showMapDrawing(showShapes) {
 		if (shape.type = 'rect') {
 			var rect = new google.maps.Rectangle({
 				type: 'rect',
-				strokeColor: '#EA231C',
+				strokeColor: '#00ba00',
 				strokeOpacity: 0.8,
 				strokeWeight: 2,
-				fillColor: '#EA231C',
+				fillColor: '#00ba00',
 				fillOpacity: 0.15,
 				editable: true,
 				draggable: true,

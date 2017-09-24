@@ -11,7 +11,7 @@
 					<option value='phone'>Phone</option>
 					<option value='email'>Email</option>
 					<option value='slack'>Slack</option>
-					<?php //<option value='discord'>Discord</option> ?>
+					<option value='discord'>Discord</option>
 				</select>
 			</div>
 			<div class="columns small-6 form-field" data-type="address-email">
@@ -45,17 +45,20 @@
 					<option value="vtext.com">Page Plus</option>
 				</select>
 			</div>
+			<div class="columns small-3 form-field" data-type="webhook-discord">
+			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>Webhook URL</h3>
 				<input type="text" id="webhook" name="webhook">
 			</div>
-			<div class="columns small-6 form-field" data-type="webhook">
+			<div class="columns small-6 form-field" data-type="webhook-slack">
 				<h3>Channel ID</h3>
 				<input type="text" id="channel" name="channel">
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>
-					Pokemon User
+					<span data-type="webhook-slack">Pokemon User</span>
+					<span data-type="webhook-discord">Pokemon Title</span>
 					<div class="info-icon">
 						<i class="fa fa-info-circle"></i>
 						<div class="info-icon-content">
@@ -89,7 +92,8 @@
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>
-					Raid User
+					<span data-type="webhook-slack">Raid User</span>
+					<span data-type="webhook-discord">Raid Title</span>
 					<div class="info-icon">
 						<i class="fa fa-info-circle"></i>
 						<div class="info-icon-content">
@@ -129,7 +133,8 @@
 			</div>
 			<div class="columns small-6 form-field" data-type="webhook">
 				<h3>
-					Raid Egg User
+					<span data-type="webhook-slack">Raid Egg User</span>
+					<span data-type="webhook-discord">Raid Egg Title</span>
 					<div class="info-icon">
 						<i class="fa fa-info-circle"></i>
 						<div class="info-icon-content">
@@ -167,6 +172,9 @@
 				<h3>Verification Code</h3>
 				<a class="btn">Send Code</a>
 				<input type="text" id="verification" name="verification" style="display: none;">
+			</div>
+			<div class="columns small-12 form-field" data-type="address-phone">
+				* Standard messaging rates apply
 			</div>
 		</div>
 	</form>

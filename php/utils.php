@@ -3,7 +3,8 @@ require 'auth.php';
 
 function init()
 {
-	return array("accounts"=>getAccounts(), "maps"=>getMaps());
+	$boundaries = db_query("SELECT lat_max, lat_min, lng_max, lng_min FROM boundaries WHERE rtime = 0");
+	return array("accounts"=>getAccounts(), "maps"=>getMaps(), "boundaries"=>$boundaries);
 }
 
 function formatAccount($account)
@@ -37,7 +38,7 @@ function formatAccount($account)
 			$newAccount['pokemon-user'] = $extra->pokemon_user;
 			$newAccount['raid-user'] = $extra->raid_user;
 			$newAccount['icon'] = 'fa-user-circle';
-			$newAccount['detail'] = $extra->channel;
+			$newAccount['detail'] = "";
 			break;
 		case 'slack':
 			$newAccount['webhook'] = $account['address'];
@@ -191,7 +192,7 @@ function formatDays($days)
 	}
 
 	$daysArr = array_filter(explode(',', $days), function($value) { return $value !== ''; });
-	
+
 	if (count($daysArr) == 7)
 	{
 		return "Daily";
