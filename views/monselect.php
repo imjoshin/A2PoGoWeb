@@ -10,9 +10,14 @@
 		</div>
 		<div class="mon-select-modal-images">
 			<?php
-				for ($i = 1; $i <= 248; $i++)
+				for ($i = 1; $i <= 386; $i++)
 				{
 					$file = 'dist/img/pokemon/' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.png';
+					if (!file_exists($file))
+					{
+						$file = "https://www.joshwoodward.com/mod/pokemon/img/icons-4/{$i}.png";
+					}
+
 					echo "
 						<div class='mon-select-modal-images-item' data-id='$i'>
 							<div class='mon-select-modal-images-item-img'  style='background-image: url($file);'></div>

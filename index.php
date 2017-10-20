@@ -19,7 +19,7 @@
 	}
 ?>
 
-<div class="map-container" data-boundaries='<?php echo json_encode($boundaries); ?>'>
+<div class="map-container" data-boundaries='<?php echo isset($boundaries) ? json_encode($boundaries) : ''; ?>'>
 	<div class="map-container-object" id="map-container-object"></div>
 </div>
 

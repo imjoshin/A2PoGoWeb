@@ -216,6 +216,11 @@ function formatDays($days)
 	return implode(", ", $ret);
 }
 
+function isDevelop()
+{
+	return strpos($_SERVER['SERVER_NAME'], "dev") !== false;
+}
+
 function unserialize_form($array)
 {
 	$data = array();

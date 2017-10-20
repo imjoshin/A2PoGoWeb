@@ -11,12 +11,19 @@ class User
 			));
 		}
 
-		$user = db_query("SELECT id, username FROM user WHERE username = ? and password = ?", array(strtolower($username), $password));
+		$user = db_query("SELECT id, username, admin FROM user WHERE username = ? and password = ?", array(strtolower($username), $password));
 
 		if (!count($user))
 		{
 			return array('success'=>false, 'output'=>array(
 				"message"=>"Invalid username or password."
+			));
+		}
+
+		if (isDevelop() && !$user[0]['admin'])
+		{
+			return array('success'=>false, 'output'=>array(
+				"message"=>"Access denied. Please log in <a href='http://a2pogo.com'>here</a>."
 			));
 		}
 
